@@ -1,11 +1,11 @@
 {
-  "name": "app",
-  "short_name": "app",
+  "name": "Quick Accident Report",
+  "short_name": "Qar App",
   "theme_color": "#000000",
   "background_color": "#ffffff",
   "display": "standalone",
-  "scope": "/",
-  "start_url": "https://ateliers.nomades.ch/~reves/qar/www/",
+  "scope": "/pwa-qar-front/",
+  "start_url": "https://reek.github.io/pwa-qar-front/index.html",
   "icons": [
     {
       "src": "assets/icons/icon-72x72.png",
