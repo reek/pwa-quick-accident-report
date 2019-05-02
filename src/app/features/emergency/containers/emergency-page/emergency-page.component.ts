@@ -25,15 +25,15 @@ export class EmergencyPageComponent implements OnInit {
     name: "Fire",
     number: "118"
   }, {
-    icon: "medkit", 
-    name: "Ambulances", 
+    icon: "medkit",
+    name: "Ambulances",
     number: "144"
   }, {
-    icon: "help-buoy", name: 
-    "REGA air rescue",
+    icon: "help-buoy",
+    name: "REGA air rescue",
     number: "1414"
   }, {
-    icon: "build", 
+    icon: "build",
     name: "TCS help",
     number: "0800 140 140"
   }]

@@ -13,7 +13,7 @@
       <ion-button type="button" (click)="onSave()">Save</ion-button>
     </div>
     <div *ngSwitchDefault>
-      <app-person-form title="Person" *ngIf="personData$ | async as personData" [values]="personData"
+      <app-person-form title="Yourself" *ngIf="personData$ | async as personData" [values]="personData"
         (onSubmitted)="onNext($event)">
       </app-person-form>
     </div>

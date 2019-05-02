@@ -4,6 +4,7 @@ import { AuthService } from '../../auth.service';
 import { Router } from '@angular/router';
 import { ILogin } from 'src/app/shared/models/auth/auth';
 import { ValidateIsEmailValid } from 'src/app/shared/validators/field.validator';
+import { NotifyService } from 'src/app/core/services/notify/notify.service';
 
 @Component({
   selector: 'app-login-page',
@@ -16,6 +17,7 @@ export class LoginPageComponent implements OnInit {
   public form: FormGroup
 
   constructor(
+    private notifyService: NotifyService,
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router) { }
@@ -40,7 +42,7 @@ export class LoginPageComponent implements OnInit {
         if (res.user && res.token) {
           return this.router.navigateByUrl("/")
         }
-      });
+      }, err => this.notifyService.show("Bad Login 😞"));
     }
   }
 

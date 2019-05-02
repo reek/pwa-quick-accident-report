@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, AsyncValidatorFn, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth.service';
 import { IRegister } from 'src/app/shared/models/auth/auth';
@@ -44,11 +44,12 @@ export class RegisterPageComponent implements OnInit {
       console.log('form register submitted');
       const payload: IRegister = this.form.value
       this.authService.register(payload).subscribe((res: any) => {
-        console.log('login response', res)
+        console.log('register response', res)
         if (res.user && res.token) {
-          return this.router.navigateByUrl("/personal/edit")
+          return this.router.navigateByUrl("/personal/view")
         }
       });
+
     }
   }
 
