@@ -1,0 +1,26 @@
+<div *ngIf="control && control.invalid && (control.dirty || control.touched)" class="alert alert-danger">
+  <ion-text color="danger" *ngIf="control.errors.required">
+    Required.
+  </ion-text>
+  <ion-text color="danger" *ngIf="control.errors.email || control.errors.validEmail">
+    Email is invalid.
+  </ion-text>
+  <ion-text color="danger" *ngIf="control.errors?.emailTaken">
+    Email already taken.
+  </ion-text>
+  <ion-text color="danger" *ngIf="control.errors.pattern">
+    Malformed.
+  </ion-text>
+  <ion-text color="danger" *ngIf="control.errors.validUrl">
+    Url Malformed.
+  </ion-text>
+  <ion-text color="danger" *ngIf="control.errors?.matchPassword">
+    Password not match.
+  </ion-text>
+  <ion-text color="danger" *ngIf="control.errors.minlength">
+    Minimum length {{ control.errors.minlength.requiredLength }}.
+  </ion-text>
+  <ion-text color="danger" *ngIf="control.errors.maxlength">
+    Maximum length {{ control.errors.maxlength.requiredLength }}.
+  </ion-text>
+</div>

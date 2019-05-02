@@ -1,0 +1,71 @@
+￼<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+
+  <ion-item-divider class="ion-padding-top">
+    <ion-title color="primary">Date & Time</ion-title>
+  </ion-item-divider>
+
+  <ion-item>
+    <ion-label>Date</ion-label>
+    <ion-input type="hidden" formControlName="date" [value]="date" required></ion-input>
+    <!-- https://ionicframework.com/docs/api/datetime -->
+    <ion-datetime (ionChange)="updateDate($event)" [placeholder]="date" display-format="MMMM DD, YYYY">
+    </ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Time</ion-label>
+    <ion-input type="hidden" formControlName="time" [value]="time" required></ion-input>
+    <!-- https://ionicframework.com/docs/api/datetime -->
+    <ion-datetime (ionChange)="updateTime($event)" [placeholder]="time" display-format="HH:mm">
+    </ion-datetime>
+  </ion-item>
+
+
+  <app-ol-map (onWatched)="getMapCoords($event)"></app-ol-map>
+
+  <ion-item-divider class="ion-padding-top">
+    <ion-title color="primary">Location</ion-title>
+  </ion-item-divider>
+
+  <div formGroupName="address">
+
+    <ion-item>
+      <ion-label>Street</ion-label>
+      <ion-input type="text" formControlName="street" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>City</ion-label>
+      <ion-input type="text" formControlName="city" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>State</ion-label>
+      <ion-input type="text" formControlName="state" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Postcode</ion-label>
+      <ion-input type="text" formControlName="postcode" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Country </ion-label>
+      <ion-input type="text" formControlName="country" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Latitude</ion-label>
+      <ion-input type="text" formControlName="latitude" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Longitude</ion-label>
+      <ion-input type="text" formControlName="longitude" required></ion-input>
+    </ion-item>
+  </div>
+
+  <ion-button type="submit" expand="block" [disabled]="!form.valid">Next</ion-button>
+
+</form>

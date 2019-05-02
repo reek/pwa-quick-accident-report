@@ -1,0 +1,38 @@
+
+
+<ion-item-divider class="ion-padding-top">
+  <ion-title color="primary">{{ title }}</ion-title>
+</ion-item-divider>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <ion-grid>
+    <ion-row>
+      <ion-col align-self-center>
+        <ion-img *ngIf="imageUrl" size="100% 100px" [src]="imageUrl"></ion-img>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-button (click)="onTake(true)" size="small" color="light">
+          <ion-icon slot="icon-only" name="color-wand"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col align-self-center>
+        <ion-button shape="round" size="large" type="button" (click)="onTake()" color="primary">
+          <ion-icon slot="icon-only" [name]="retry ? 'reverse-camera' : 'camera'"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col align-self-center>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col align-self-center>
+        <ion-input type="hidden" formControlName="imageUrl"></ion-input>
+        <ion-button type="submit" expand="block" [disabled]="!form.valid">Next</ion-button>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+</form>

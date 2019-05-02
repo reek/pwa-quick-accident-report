@@ -1,0 +1,83 @@
+<ion-content>
+
+  <form [formGroup]="form" (ngSubmit)="onLogin()">
+
+    <ion-card>
+
+      <ion-card-header>
+        <ion-card-title>
+          <div class="logo"></div>
+          <h1>Quick Accident Report</h1>
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="stacked">Email</ion-label>
+          <ion-input type="email" formControlName="email" autofocus required></ion-input>
+          <app-field-error-message [control]="form.controls.email"></app-field-error-message>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Password</ion-label>
+          <ion-input type="password" formControlName="password" required></ion-input>
+          <app-field-error-message [control]="form.controls.password"></app-field-error-message>
+        </ion-item>
+
+        <ion-button expand="block" type="submit" [disabled]="!form.valid">Login</ion-button>
+
+        <ion-grid>
+          <ion-row>
+            <ion-col size="6">
+              <ion-button expand="full" fill="clear" type="button" [routerLink]="['/auth/forgot']">Forgot
+                password
+              </ion-button>
+            </ion-col>
+            <ion-col size="6">
+              <ion-button expand="full" fill="clear" type="button" [routerLink]="['/auth/register']">Register
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+      <!-- 
+      <p>Values: {{ form.value | json }}</p>
+      <p>Status: {{ form.status | json }}</p>
+     -->
+    </ion-card>
+
+  </form>
+
+</ion-content>
+
+
+
+
+<!--        -->
+
+<!--       <div *ngIf="form.get('email').errors && form.get('email').errors.emailFake">
+          😢 Oh noes, this email is fake!
+        </div> -->
+<!--      ok
+    
+    <div *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)" class="alert alert-danger">
+          <div *ngIf="f.email.errors.required">
+            Email is required.
+          </div>
+          <div *ngIf="f.email.errors.email">
+            Email is invalid.
+          </div>
+          <div *ngIf="f.email.errors.isEmailMalformed">
+            Email is malformed.
+          </div>
+        </div>
+  
+        <div *ngIf="f.email.status === 'PENDING'">
+          Email Checking...
+        </div>
+        <div *ngIf="f.email.status === 'VALID'">
+          Email is avaliable!
+        </div>
+        <div *ngIf="f.email.errors?.isEmailTaken">
+          Email is already taken!.
+        </div> -->

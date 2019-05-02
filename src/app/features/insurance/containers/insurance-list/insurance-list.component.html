@@ -1,0 +1,24 @@
+<app-header title="Insurances"></app-header>
+
+<ion-content>
+
+  <ion-searchbar (ionChange)="onSearch($event)" showCancelButton cancelButtonText="Custom Cancel"></ion-searchbar>
+
+  <div *ngIf="(insurances$ | async | searchFilter:filterTerm) as insurances; else empty">
+    <ion-item *ngFor="let insurance of insurances">
+      <ion-thumbnail slot="start">
+        <img [src]="'assets/images/insurance/square/' + insurance.logo">
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ insurance.compagny }}</h2>
+        <p>{{ insurance.phone }}</p>
+      </ion-label>
+      <ion-button fill="outline" slot="end" [routerLink]="['view', insurance._id]">More</ion-button>
+    </ion-item>
+  </div>
+
+  <ng-template #empty>
+    <h4>No Insurance Found!</h4>
+  </ng-template>
+
+</ion-content>

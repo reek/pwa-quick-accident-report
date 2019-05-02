@@ -1,0 +1,22 @@
+<app-header title="View Personal"></app-header>
+
+<ion-content>
+
+  <div [ngSwitch]="step">
+    <div *ngSwitchCase="2">
+      <app-address-form title="Address" *ngIf="addressData$ | async as addressData" [values]="addressData"
+        (onSubmitted)="onNext($event)">
+      </app-address-form>
+    </div>
+    <div *ngSwitchCase="3">
+      <h5>Store on Database</h5>
+      <ion-button type="button" (click)="onSave()">Save</ion-button>
+    </div>
+    <div *ngSwitchDefault>
+      <app-person-form title="Person" *ngIf="personData$ | async as personData" [values]="personData"
+        (onSubmitted)="onNext($event)">
+      </app-person-form>
+    </div>
+  </div>
+
+</ion-content>

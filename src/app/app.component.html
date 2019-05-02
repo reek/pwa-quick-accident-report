@@ -1,0 +1,102 @@
+<ion-app>
+
+  <app-updates-notification></app-updates-notification>
+
+  <ion-menu side="end" menuId="first">
+    <ion-header>
+      <ion-toolbar color="dark" *ngIf="(userData$ | async) as user">
+        <ion-buttons slot="end">
+          <ion-button (click)="closeMenu()">
+            <ion-icon slot="start" name="close"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <!-- <ion-title>Menu</ion-title> -->
+        <!-- /assets/images/avatar2.png -->
+        <ion-item color="dark">
+          <ion-avatar slot="start">
+            <img [src]="user.avatar">
+          </ion-avatar>
+          <ion-label>{{ user.email }}</ion-label>
+        </ion-item>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-list (click)="closeMenu()">
+
+        <ion-item-divider>
+          <ion-label>Main</ion-label>
+        </ion-item-divider>
+
+        <ion-item [routerLink]="['/']">
+          <ion-icon slot="start" color="primary" name="apps"></ion-icon>
+          Dashboard
+        </ion-item>
+
+        <ion-item [routerLink]="['/personal']">
+          <ion-icon slot="start" color="primary" name="person"></ion-icon>
+          Personal
+        </ion-item>
+
+        <ion-item [routerLink]="['/vehicles']">
+          <ion-icon slot="start" color="primary" name="car"></ion-icon>
+          Vehicles
+        </ion-item>
+
+        <ion-item [routerLink]="['/accidents']">
+          <ion-icon slot="start" color="primary" name="warning"></ion-icon>
+          Accidents
+        </ion-item>
+
+        <ion-item [routerLink]="['/emergency']">
+          <ion-icon slot="start" color="primary" name="call"></ion-icon>
+          Emergency
+        </ion-item>
+
+        <ion-item [routerLink]="['/insurances']">
+          <ion-icon slot="start" color="primary" name="umbrella"></ion-icon>
+          Insurances
+        </ion-item>
+
+        <ion-item [routerLink]="['/transmit']">
+          <ion-icon slot="start" color="primary" name="swap"></ion-icon>
+          Transmit
+        </ion-item>
+
+        <ion-item-divider>
+          <ion-label>App</ion-label>
+        </ion-item-divider>
+
+        <ion-item [routerLink]="['/feedback']">
+          <ion-icon slot="start" color="primary" name="chatboxes"></ion-icon>
+          Feedback
+        </ion-item>
+
+        <!--         
+        <ion-item [routerLink]="['/auth/login']">
+          <ion-icon slot="start" color="primary" name="lock"></ion-icon>
+          Login
+        </ion-item>
+
+        <ion-item [routerLink]="['/auth/register']">
+          <ion-icon slot="start" color="primary" name="key"></ion-icon>
+          Register
+        </ion-item>
+
+        <ion-item [routerLink]="['/auth/forgot']">
+          <ion-icon slot="start" color="primary" name="medical"></ion-icon>
+          Forgot
+        </ion-item> 
+        -->
+
+        <ion-item routerLink (click)="onLogout()">
+          <ion-icon slot="start" color="primary" name="power"></ion-icon>
+          Logout
+        </ion-item>
+      </ion-list>
+    </ion-content>
+
+  </ion-menu>
+
+  <ion-router-outlet main></ion-router-outlet>
+</ion-app>

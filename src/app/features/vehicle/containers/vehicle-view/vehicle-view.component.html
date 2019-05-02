@@ -1,0 +1,16 @@
+<app-header title="Vehicle"></app-header>
+
+<ion-content>
+  <div *ngIf="(vehicle$ | async) as vehicle; else notFound">
+    <app-image [src]="vehicle.imageUrl" height="200px"></app-image>
+    <app-vehicle-form title="" button="Save" [values]="vehicle" (onSubmitted)="onSave($event)">
+    </app-vehicle-form>
+  </div>
+
+  <ng-template #notFound>
+    <h4>Vehicle Not Found</h4>
+  </ng-template>
+
+  <!--   <ion-button expand="block" type="submit" [disabled]="!form.valid">Next</ion-button> -->
+
+</ion-content>

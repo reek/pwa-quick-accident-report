@@ -1,0 +1,55 @@
+<app-header title="Dashboard"></app-header>
+
+<ion-content>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" [routerLink]="['/personal']">
+        <div>
+          <ion-icon name="person" color="primary"></ion-icon>
+        </div>
+        <h1>Personal</h1>
+      </ion-col>
+      <ion-col size="6" [routerLink]="['/vehicles']">
+        <div>
+          <ion-icon name="car" mode="ios" color="primary"></ion-icon>
+        </div>
+        <h1>Vehicles</h1>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="6" [routerLink]="['/accidents']">
+        <div>
+          <ion-icon name="warning" color="primary"></ion-icon>
+        </div>
+        <h1>Accidents</h1>
+      </ion-col>
+      <ion-col size="6" [routerLink]="['/emergency']">
+        <div>
+          <ion-icon name="call" color="primary"></ion-icon>
+        </div>
+        <h1>Emergency</h1>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="6" [routerLink]="['/insurances']">
+        <div>
+          <ion-icon name="umbrella" color="primary"></ion-icon>
+        </div>
+        <h1>Insurances</h1>
+      </ion-col>
+      <ion-col size="6" [routerLink]="['/transmit']">
+        <div>
+          <ion-icon name="swap" color="primary"></ion-icon>
+        </div>
+        <h1>Transmit</h1>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+
+
+</ion-content>

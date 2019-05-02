@@ -1,0 +1,61 @@
+￼
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+  <ion-item-divider class="ion-padding-top">
+    <ion-title color="primary">Address</ion-title>
+  </ion-item-divider>
+
+  <ion-item>
+    <ion-label position="fixed">Street</ion-label>
+    <ion-input type="text" formControlName="street" clearInput required></ion-input>
+    <!--  {{places | json}} -->
+  </ion-item>
+
+  <div *ngIf="(places$ | async) as places" class="datalist">
+
+    <ion-item *ngFor="let place of places">
+      <ion-icon slot="start" name="pin"></ion-icon>
+      <ion-label (click)="updateAddress(place)" text-wrap>{{ place.display_name }}</ion-label>
+    </ion-item>
+  </div>
+
+  <ion-item>
+    <ion-label position="fixed">Postcode</ion-label>
+    <ion-input type="text" formControlName="postcode" required></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="fixed">City</ion-label>
+    <ion-input type="text" formControlName="city" required></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="fixed">State</ion-label>
+    <ion-input type="text" formControlName="state"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="fixed">Country</ion-label>
+    <ion-input type="text" formControlName="country" required></ion-input>
+  </ion-item>
+
+  <ion-item class="ion-hide">
+    <ion-input type="hidden" formControlName="longitude" required></ion-input>
+  </ion-item>
+
+  <ion-item class="ion-hide">
+    <ion-input type="hidden" formControlName="latitude" required></ion-input>
+  </ion-item>
+
+  <ion-button shape="block" fill="clear" type="button" (click)="onLocate()">
+    <ion-icon slot="start" name="locate"></ion-icon>
+    Locate
+  </ion-button>
+
+  <ion-button shape="block" type="submit" [disabled]="!form.valid">
+    Next
+  </ion-button>
+
+
+</form>

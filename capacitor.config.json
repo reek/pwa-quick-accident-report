@@ -1,0 +1,6 @@
+{
+  "appId": "ch.nomades.mwad",
+  "appName": "App",
+  "bundledWebRuntime": false,
+  "webDir": "www"
+}

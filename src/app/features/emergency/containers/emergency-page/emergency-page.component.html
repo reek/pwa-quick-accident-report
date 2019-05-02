@@ -1,0 +1,31 @@
+<app-header title="Emergency"></app-header>
+
+<ion-content>
+
+  <app-ol-map [height]="height" (onWatched)="getPlace($event)"></app-ol-map>
+
+  <ion-item-divider class="ion-padding-top">
+      <ion-title color="primary">Your Location</ion-title>
+    </ion-item-divider>
+
+  <ion-item>
+    <div *ngIf="(place$ | async) as place">
+      <p><b>Longitude:</b> {{place.longitude}}</p>
+      <p><b>Latitude:</b> {{place.latitude}}</p>
+      <p><b>Address:</b><ion-text class="ion-text-justify"> {{place.display_name}}</ion-text> </p>
+    </div>
+  </ion-item>
+
+  <ion-item-divider class="ion-padding-top">
+      <ion-title color="primary">Emergency Services</ion-title>
+    </ion-item-divider>
+
+  <ion-item *ngFor="let contact of contacts">
+    <ion-icon slot="start" [name]="contact.icon"></ion-icon>
+    <ion-label><b>{{contact.number}}</b> {{contact.name}}</ion-label>
+    <ion-fab-button color="success" size="small" shape="" (click)="onCall(contact.number)">
+      <ion-icon name="call"></ion-icon>
+    </ion-fab-button>
+  </ion-item>
+
+</ion-content>

@@ -1,0 +1,92 @@
+<app-header title="Insurance"></app-header>
+
+<ion-content>
+
+  <ion-card *ngIf="insurance$ | async as insurance; else notFound">
+    <ion-card-header>
+      <ion-img [src]="'assets/images/insurance/banner/' + insurance.logo" style="width:100%; height:200px;"></ion-img>
+      <ion-card-subtitle>{{ insurance._id }}</ion-card-subtitle>
+      <ion-card-title>{{ insurance.compagny }}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem placeat distinctio dolores blanditiis
+      autem voluptate eos voluptatibus cupiditate tempora harum. Aspernatur quis quod corrupti illo labore nam,
+      praesentium eos placeat.
+    </ion-card-content>
+
+
+    <ion-item-sliding>
+      <ion-item>
+        <ion-icon name="call" slot="start"></ion-icon>
+        <ion-label>{{ insurance.phone }}</ion-label>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option (click)="insurance.callTo()">
+          <ion-icon name="call" slot="start"></ion-icon>
+          Call
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+
+    <ion-item-sliding>
+      <ion-item>
+        <ion-icon name="mail" slot="start"></ion-icon>
+        <ion-label>{{ insurance.getEmail() }}</ion-label>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option (click)="insurance.mailTo()">
+          <ion-icon name="mail" slot="start"></ion-icon>
+          Message
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+
+    <ion-item-sliding>
+      <ion-item>
+        <ion-icon name="globe" slot="start"></ion-icon>
+        <ion-label>{{ insurance.getDomain() }}</ion-label>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option (click)="insurance.visit()">
+          <ion-icon name="globe" slot="start"></ion-icon>
+          Visit
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+
+
+  </ion-card>
+
+  <ng-template #notFound>
+    <h4>Not Found</h4>
+  </ng-template>
+
+</ion-content>
+
+
+
+<!-- 
+  <ion-item-sliding>
+    <ion-item>
+      <ion-icon name="mail" slot="start"></ion-icon>
+      <ion-label>{{ insurance.email }}</ion-label>
+    </ion-item>
+    <ion-item-options side="end">
+      <ion-item-option (click)="onMail(insurance.email)">
+        <ion-icon name="mail" slot="start"></ion-icon>
+      </ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
+
+  <ion-item-sliding>
+    <ion-item>
+      <ion-icon name="globe" slot="start"></ion-icon>
+      <ion-label>{{ insurance.website }}</ion-label>
+    </ion-item>
+    <ion-item-options side="end">
+      <ion-item-option (click)="onVisit(insurance.website)">
+        <ion-icon name="globe" slot="start"></ion-icon>
+      </ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding> -->

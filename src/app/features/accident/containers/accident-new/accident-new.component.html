@@ -1,0 +1,46 @@
+<app-header title="New Accident"></app-header>
+
+<ion-content>
+
+  <div [ngSwitch]="step">
+    <div *ngSwitchCase="2">
+      <app-location-form title="Accident" [values]="" (onSubmitted)="onNext($event)">
+      </app-location-form>
+    </div>
+    <div *ngSwitchCase="3">
+      <app-take-picture title="Incident Picture" (onTaked)="onNext($event)"></app-take-picture>
+    </div>
+    <div *ngSwitchCase="4">
+      <app-take-picture title="Your Vehicle Damage" (onTaked)="onNext($event)"></app-take-picture>
+    </div>
+    <div *ngSwitchCase="5">
+      <app-take-picture title="Third-Party Driving License Card" (onTaked)="onNext($event)">
+      </app-take-picture>
+    </div>
+    <div *ngSwitchCase="6">
+      <app-take-picture title="Third-Party Registration Vehicle Document" (onTaked)="onNext($event)">
+      </app-take-picture>
+    </div>
+    <div *ngSwitchCase="7">
+      <app-take-picture title="Third-Party The rear of the vehicle (make, model, plate)" (onTaked)="onNext($event)">
+      </app-take-picture>
+    </div>
+    <div *ngSwitchCase="8">
+      <app-person-form title="Third-Party Person" (onSubmitted)="onNext($event)"></app-person-form>
+    </div>
+    <div *ngSwitchCase="9">
+      <app-address-form title="Third-Party Address" (onSubmitted)="onNext($event)"></app-address-form>
+    </div>
+    <div *ngSwitchCase="10">
+      <app-insurance-form title="Third-Party Insurance" (onSubmitted)="onNext($event)"></app-insurance-form>
+    </div>
+    <div *ngSwitchCase="11">
+      <h4>Store on Database</h4>
+      <ion-button type="button" (click)="onSave()">Save</ion-button>
+    </div>
+    <div *ngSwitchDefault>
+      <app-what-todo-form (onSubmitted)="onNext($event)"></app-what-todo-form>
+    </div>
+  </div>
+
+</ion-content>
