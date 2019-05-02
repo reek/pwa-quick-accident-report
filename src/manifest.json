@@ -5,7 +5,7 @@
   "background_color": "#ffffff",
   "display": "standalone",
   "scope": "/",
-  "start_url": "https://ateliers.nomades.ch/~reves/qar/www/",
+  "start_url": "https://reek.github.io/pwa-qar-front/index.html",
   "icons": [
     {
       "src": "assets/icons/icon-72x72.png",
