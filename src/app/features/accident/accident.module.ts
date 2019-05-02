@@ -8,6 +8,7 @@ import { AccidentViewComponent } from './containers/accident-view/accident-view.
 import { LocationFormComponent } from 'src/app/shared/ui/location-form/location-form.component'
 import { WhatTodoFormComponent } from 'src/app/shared/ui/what-todo-form/what-todo-form.component';
 import { InsuranceFormComponent } from 'src/app/shared/ui/insurance-form/insurance-form.component';
+import { ThirdPartyFormComponent } from 'src/app/shared/ui/third-party-form/third-party-form.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { InsuranceFormComponent } from 'src/app/shared/ui/insurance-form/insuran
     AccidentViewComponent,
     WhatTodoFormComponent,
     LocationFormComponent, 
-    InsuranceFormComponent],
+    InsuranceFormComponent, 
+    ThirdPartyFormComponent],
   imports: [
     SharedModule,
     RouterModule.forChild([
