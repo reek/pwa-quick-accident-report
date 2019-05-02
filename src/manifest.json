@@ -4,8 +4,8 @@
   "theme_color": "#000000",
   "background_color": "#ffffff",
   "display": "standalone",
-  "scope": "pwa-qar-front/",
-  "start_url": "https://reek.github.io/pwa-qar-front/index.html",
+  "scope": "/",
+  "start_url": "/",
   "icons": [
     {
       "src": "assets/icons/icon-72x72.png",
