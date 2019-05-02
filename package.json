@@ -6,11 +6,12 @@
   "scripts": {
     "ng": "ng",
     "dev": "ng serve",
-    "dev:back": "cd .. && cd project-backend && npm run dev",
+    "dev:back": "cd .. && cd pwa-qar-back && npm run dev",
     "git:push": "git add . && git commit -m'save' && git push -u",
     "build": "ng build",
     "build:prod": "ng build --prod && cp .htaccess www/.htaccess && npx copy web",
     "build:prod:nat": "ng build --prod --deployUrl='https://ateliers.nomades.ch/~reves/qar/www/' && cp .htaccess www/.htaccess && npx copy web",
+    "build:prod:gh": "ng build --prod --deployUrl='https://reek.github.io/pwa-qar-front/' && cp .htaccess www/.htaccess && npx copy web",  
     "prod": "npm run build:prod && http-server -p 4200 -c-1 www -o",
     "deploy:gh": "gh-pages -d www",
     "deploy:nat": "",
