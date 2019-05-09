@@ -36,19 +36,17 @@ export class Insurance implements IInsurance {
     return this.website.split("/")[2]
   }
 
-  public callTo(): void {
+  public callIt(): void {
     location.href = 'tel:' + this.phone.replace(/\s+/, '')
   }
 
-  public mailTo(): void {
-    location.href = 'mailto:' + this.getEmail()
+  public mailIt(): void {
+    location.href = 'mailto:' + this.email
   }
 
-  public visit(): void {
-    location.href = this.website
+  public visitIt(): void {
+    //location.href = this.website
+    window.open(this.website);
   }
 
-  public getEmail(): string {
-    return this.getDomain().replace(/www./, 'info@')
-  }
 }
