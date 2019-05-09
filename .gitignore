@@ -3,6 +3,7 @@
 
 # My Rules
 src/environments/environment.prod.ts
+*.spec.ts
 
 *~
 *.sw[mnpcod]
