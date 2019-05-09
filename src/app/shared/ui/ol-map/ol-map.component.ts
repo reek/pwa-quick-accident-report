@@ -96,8 +96,8 @@ export class OlMapComponent implements OnInit {
     this.iconStyle = new Style({
       image: new Icon({
         anchor: [0.5, 0.5],
-        scale: .25,
-        src: 'assets/images/marker/marker-orange.png'
+        scale: .15,
+        src: 'assets/images/marker/marker-3.png'
       })
     });
 
