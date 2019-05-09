@@ -1,29 +1,27 @@
-
-
 <ion-item-divider class="ion-padding-top">
   <ion-title color="primary">{{ title }}</ion-title>
 </ion-item-divider>
 
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <ion-grid>
-    <ion-row>
-      <ion-col align-self-center>
+
+    <ion-row align-self-center>
+      <ion-col>
         <ion-img *ngIf="imageUrl" size="100% 100px" [src]="imageUrl"></ion-img>
       </ion-col>
     </ion-row>
 
-    <ion-row>
-      <ion-col>
-        <ion-button (click)="onTake(true)" size="small" color="light">
-          <ion-icon slot="icon-only" name="color-wand"></ion-icon>
-        </ion-button>
+    <ion-row size="12">
+      <ion-col size="3" offset="0">
+        <ion-fab-button (click)="onTake(true)" size="large" color="light">
+          <ion-icon name="color-wand"></ion-icon>
+        </ion-fab-button>
       </ion-col>
-      <ion-col align-self-center>
-        <ion-button shape="round" size="large" type="button" (click)="onTake()" color="primary">
-          <ion-icon slot="icon-only" [name]="retry ? 'reverse-camera' : 'camera'"></ion-icon>
-        </ion-button>
-      </ion-col>
-      <ion-col align-self-center>
+
+      <ion-col size="3" offset="6" align-items-end>
+        <ion-fab-button size="large" type="button" (click)="onTake()" color="primary">
+          <ion-icon [name]="retry ? 'reverse-camera' : 'camera'"></ion-icon>
+        </ion-fab-button>
       </ion-col>
     </ion-row>
 

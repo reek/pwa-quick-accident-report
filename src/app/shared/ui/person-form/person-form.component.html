@@ -14,12 +14,13 @@
 
   <ion-item>
     <ion-label>FirstName</ion-label>
-    <ion-input type="text" formControlName="firstName" required></ion-input>
+    <ion-input type="text" formControlName="firstName" [value]="form.controls.firstName.value | titlecase" required>
+    </ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label>LastName</ion-label>
-    <ion-input type="text" formControlName="lastName" required></ion-input>
+    <ion-input type="text" formControlName="lastName" [value]="form.controls.lastName.value | titlecase" required></ion-input>
   </ion-item>
 
   <ion-item>
@@ -27,7 +28,7 @@
     <ion-input type="hidden" formControlName="birthDate" required>
     </ion-input>
     <!-- https://ionicframework.com/docs/api/datetime -->
-    <ion-datetime (ionChange)="updateBirthDate($event)" [value]="values?.birthDate || '____'"
+    <ion-datetime (ionChange)="updateBirthDate($event)" [value]="values?.birthDate || ''"
       display-format="MMMM DD, YYYY">
     </ion-datetime>
   </ion-item>

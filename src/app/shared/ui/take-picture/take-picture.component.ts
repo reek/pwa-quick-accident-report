@@ -1,9 +1,9 @@
-
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { CameraService } from 'src/app/core/services/camera/camera.service';
 import { IPicture } from '../../models/picture/picture';
 import * as Tesseract from 'tesseract.js'
+
 
 @Component({
   selector: 'app-take-picture',
@@ -39,9 +39,25 @@ export class TakePictureComponent implements OnInit {
     return await fetch(base64Data).then(res => res.blob());
   }
 
+  public async blobToBase64(blob) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.readAsDataURL(blob)
+      reader.onloadend = () => {
+        resolve(reader.result)
+      }
+      reader.onerror = (err) => {
+        reader.abort();
+        reject(err)
+      }
+    })
+  }
+
   public async onTake(fake: boolean = false) {
     if (fake) {
-      this.imageUrl = await fetch("https://loremflickr.com/300/200/car&_=" + Date.now()).then(res => res.url)
+      //this.imageUrl = await fetch("https://loremflickr.com/300/200/car&_=" + Date.now()).then(res => res.url)
+      const blob = await fetch("https://loremflickr.com/300/200/car&_=" + Date.now()).then(res => res.blob()).catch(err => err);
+      this.imageUrl = await this.blobToBase64(blob).then(base64 => base64).catch(err => err);
     } else {
       this.imageUrl = await this.cameraService.takePicture()
     }

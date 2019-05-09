@@ -8,7 +8,7 @@
 
   <ion-item>
     <ion-label position="fixed">Street</ion-label>
-    <ion-input type="text" formControlName="street" clearInput required></ion-input>
+    <ion-input type="text" formControlName="street" clearInput  [value]="form.controls.street.value | titlecase" required></ion-input>
     <!--  {{places | json}} -->
   </ion-item>
 
@@ -27,17 +27,17 @@
 
   <ion-item>
     <ion-label position="fixed">City</ion-label>
-    <ion-input type="text" formControlName="city" required></ion-input>
+    <ion-input type="text" formControlName="city"  [value]="form.controls.city.value | titlecase" required></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label position="fixed">State</ion-label>
-    <ion-input type="text" formControlName="state"></ion-input>
+    <ion-input type="text" formControlName="state" [value]="form.controls.state.value | titlecase"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label position="fixed">Country</ion-label>
-    <ion-input type="text" formControlName="country" required></ion-input>
+    <ion-input type="text" formControlName="country" [value]="form.controls.country.value | titlecase" required></ion-input>
   </ion-item>
 
   <ion-item class="ion-hide">

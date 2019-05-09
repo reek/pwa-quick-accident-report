@@ -49,7 +49,7 @@ export class AuthService {
   }
 
   public logout() {
-    localStorage.setItem("authToken", null)
+    localStorage.setItem(env.authTokenStorageKey, null)
     this.userLogged.next(false)
     this.router.navigateByUrl("/auth/login")
   }

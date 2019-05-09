@@ -32,7 +32,12 @@ export class InsuranceService implements OnInit {
         }),
         tap((insurances: Insurance[]) => console.log(`Here we got insurances!`, insurances))
       )
-      .subscribe((insurances: Insurance[]) => this.subject.next(insurances))
+      .subscribe((insurances: Insurance[]) => {
+        this.subject.next(insurances)
+        //this.subject.complete()
+      },
+        (err) => console.log("insurance subscription error", err),
+        () => console.log('insurance subscription completed.'))
   }
 
   public getInsurances(): Observable<Insurance[]> {
