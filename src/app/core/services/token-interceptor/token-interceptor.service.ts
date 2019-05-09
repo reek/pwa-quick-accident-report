@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
+import { environment as env } from 'src/environments/environment';
+
 
 @Injectable({ providedIn: 'root' })
 export class TokenInterceptor implements HttpInterceptor {
@@ -9,7 +11,7 @@ export class TokenInterceptor implements HttpInterceptor {
   constructor() { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const storage = localStorage.getItem('authToken');
+    const storage = localStorage.getItem(env.authTokenStorageKey);
     if (!storage) {
       return next.handle(request).pipe(
         this._saveToken(),
@@ -19,7 +21,7 @@ export class TokenInterceptor implements HttpInterceptor {
     request = request.clone({
       setHeaders: {
         // TODO: pass storage KEY with environement config
-        Authorization: `${localStorage.getItem('authToken')}`
+        Authorization: `${localStorage.getItem(env.authTokenStorageKey)}`
       }
     });
     return next.handle(request).pipe(
@@ -37,7 +39,7 @@ export class TokenInterceptor implements HttpInterceptor {
       if (event instanceof HttpResponse) {
         console.info('TokenInterceptor', event);
         if (event.body.token) {
-          localStorage.setItem('authToken', event.body.token);
+          localStorage.setItem(env.authTokenStorageKey, event.body.token);
         }
       }
       return event;
