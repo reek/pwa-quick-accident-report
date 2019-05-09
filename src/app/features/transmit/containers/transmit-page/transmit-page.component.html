@@ -5,13 +5,13 @@
     <ion-title color="primary">Transmit</ion-title>
   </ion-item-divider>
 
-  <ion-item-divider class="ion-padding-top">
-    <ion-label color="dark">Scan the QR code with your data</ion-label>
-  </ion-item-divider>
-
   <ion-card>
 
     <ion-card-content>
+
+      <ion-item-divider class="ion-padding-top">
+        <ion-label color="dark">Scan the QR code with your data</ion-label>
+      </ion-item-divider>
 
       <ion-img *ngIf="qrCode" width="150" height="150" [src]="qrCode"></ion-img>
 
