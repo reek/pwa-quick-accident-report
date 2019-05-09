@@ -15,27 +15,27 @@ export class EmergencyPageComponent implements OnInit {
   public contacts: Object[] = [{
     icon: "notifications",
     name: "Emergency",
-    number: "112"
+    phone: "112"
   }, {
     icon: "star",
     name: "Police",
-    number: "117"
+    phone: "117"
   }, {
     icon: "flame",
     name: "Fire",
-    number: "118"
+    phone: "118"
   }, {
     icon: "medkit",
     name: "Ambulances",
-    number: "144"
+    phone: "144"
   }, {
     icon: "help-buoy",
     name: "REGA air rescue",
-    number: "1414"
+    phone: "1414"
   }, {
     icon: "build",
     name: "TCS help",
-    number: "0800 140 140"
+    phone: "0800 140 140"
   }]
 
   constructor(
@@ -43,8 +43,8 @@ export class EmergencyPageComponent implements OnInit {
 
   public ngOnInit() { }
 
-  public onCall(number: string): void {
-    location.href = number.replace(/\s+/, '')
+  public onCall(phoneNumber: string): void {
+    location.href = 'tel:' + phoneNumber.replace(/\s+/, '')
   }
 
   public getPlace(coords: Coordinates) {

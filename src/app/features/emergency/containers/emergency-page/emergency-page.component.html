@@ -22,8 +22,8 @@
 
   <ion-item *ngFor="let contact of contacts">
     <ion-icon slot="start" [name]="contact.icon"></ion-icon>
-    <ion-label><b>{{contact.number}}</b> {{contact.name}}</ion-label>
-    <ion-fab-button color="success" size="small" shape="" (click)="onCall(contact.number)">
+    <ion-label><b>{{contact.phone}}</b> {{contact.name}}</ion-label>
+    <ion-fab-button color="success" size="small" shape="" (click)="onCall(contact.phone)">
       <ion-icon name="call"></ion-icon>
     </ion-fab-button>
   </ion-item>
