@@ -17,17 +17,17 @@
 
   <ion-item>
     <ion-label>Make</ion-label>
-    <ion-input type="text" formControlName="make"></ion-input>
+    <ion-input type="text" formControlName="make" [value]="form.controls.make.value | titlecase"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label>Model</ion-label>
-    <ion-input type="text" formControlName="model"></ion-input>
+    <ion-input type="text" formControlName="model" [value]="form.controls.model.value | titlecase"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label>Plate Number</ion-label>
-    <ion-input type="text" formControlName="plateNumber"></ion-input>
+    <ion-input type="text" formControlName="plateNumber" [value]="form.controls.plateNumber.value | uppercase"></ion-input>
   </ion-item>
 
   <ion-item>
