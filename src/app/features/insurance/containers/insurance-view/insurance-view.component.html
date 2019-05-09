@@ -22,7 +22,7 @@
         <ion-label>{{ insurance.phone }}</ion-label>
       </ion-item>
       <ion-item-options side="end">
-        <ion-item-option (click)="insurance.callTo()">
+        <ion-item-option (click)="insurance.callIt()">
           <ion-icon name="call" slot="start"></ion-icon>
           Call
         </ion-item-option>
@@ -32,10 +32,10 @@
     <ion-item-sliding>
       <ion-item>
         <ion-icon name="mail" slot="start"></ion-icon>
-        <ion-label>{{ insurance.getEmail() }}</ion-label>
+        <ion-label>{{ insurance.email }}</ion-label>
       </ion-item>
       <ion-item-options side="end">
-        <ion-item-option (click)="insurance.mailTo()">
+        <ion-item-option (click)="insurance.mailIt()">
           <ion-icon name="mail" slot="start"></ion-icon>
           Message
         </ion-item-option>
@@ -48,7 +48,7 @@
         <ion-label>{{ insurance.getDomain() }}</ion-label>
       </ion-item>
       <ion-item-options side="end">
-        <ion-item-option (click)="insurance.visit()">
+        <ion-item-option (click)="insurance.visitIt()">
           <ion-icon name="globe" slot="start"></ion-icon>
           Visit
         </ion-item-option>
