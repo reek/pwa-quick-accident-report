@@ -1,6 +1,8 @@
 {
-  "appId": "ch.nomades.mwad",
-  "appName": "App",
+  "appId": "ch.cadze.pwa-qar",
+  "appName": "app",
   "bundledWebRuntime": false,
-  "webDir": "www"
+  "webDir": "www",
+  "linuxAndroidStudioPath": "/opt/android-studio/bin/studio.sh",
+  "npmClient": "npm"
 }
