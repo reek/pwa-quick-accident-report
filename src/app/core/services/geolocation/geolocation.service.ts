@@ -17,8 +17,13 @@ export class GeolocationService {
     return Geolocation.getCurrentPosition(options || this.options);
   }
 
-  public async getCurrentPositionAsync(options?: GeolocationOptions): Promise<GeolocationPosition> {
-    return await this.getCurrentPosition(options || this.options);
-  }
-
+}
+export interface ICoords {
+  latitude: number | string
+  longitude: number | string
+  accuracy?: number | string
+  altitude?: number | string
+  altitudeAccuracy?: number | string
+  heading?: number | string
+  speed?: number | string
 }
