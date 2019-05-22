@@ -14,7 +14,7 @@
         <!-- /assets/images/avatar2.png -->
         <ion-item color="dark">
           <ion-avatar slot="start">
-            <img [src]="user.avatar">
+            <img [src]="user.avatar" />
           </ion-avatar>
           <ion-label>{{ user.email }}</ion-label>
         </ion-item>
@@ -24,42 +24,38 @@
     <ion-content>
       <ion-list (click)="closeMenu()">
 
-        <ion-item-divider>
-          <ion-label>Main</ion-label>
-        </ion-item-divider>
-
-        <ion-item [routerLink]="['/']">
+        <ion-item routerLink="/">
           <ion-icon slot="start" color="primary" name="apps"></ion-icon>
           Dashboard
         </ion-item>
 
-        <ion-item [routerLink]="['/personal']">
+        <ion-item routerLink="/personal">
           <ion-icon slot="start" color="primary" name="person"></ion-icon>
           Personal
         </ion-item>
 
-        <ion-item [routerLink]="['/vehicles']">
-          <ion-icon slot="start" color="primary" name="car"></ion-icon>
+        <ion-item routerLink="/vehicles">
+          <ion-icon slot="start" color="primary" name="logo-model-s"></ion-icon>
           Vehicles
         </ion-item>
 
-        <ion-item [routerLink]="['/accidents']">
+        <ion-item routerLink="/accidents">
           <ion-icon slot="start" color="primary" name="warning"></ion-icon>
           Accidents
         </ion-item>
 
-        <ion-item [routerLink]="['/emergency']">
+        <ion-item routerLink="/emergency">
           <ion-icon slot="start" color="primary" name="call"></ion-icon>
           Emergency
         </ion-item>
 
-        <ion-item [routerLink]="['/insurances']">
+        <ion-item routerLink="/insurances">
           <ion-icon slot="start" color="primary" name="umbrella"></ion-icon>
           Insurances
         </ion-item>
 
-        <ion-item [routerLink]="['/transmit']">
-          <ion-icon slot="start" color="primary" name="swap"></ion-icon>
+        <ion-item routerLink="/transmit">
+          <ion-icon slot="start" color="primary" name="wifi"></ion-icon>
           Transmit
         </ion-item>
 
@@ -67,30 +63,30 @@
           <ion-label>App</ion-label>
         </ion-item-divider>
 
-        <ion-item [routerLink]="['/feedback']">
+        <ion-item routerLink="/feedback">
           <ion-icon slot="start" color="primary" name="chatboxes"></ion-icon>
           Feedback
         </ion-item>
 
         <!--         
-        <ion-item [routerLink]="['/auth/login']">
+        <ion-item routerLink="/auth/login">
           <ion-icon slot="start" color="primary" name="lock"></ion-icon>
           Login
         </ion-item>
 
-        <ion-item [routerLink]="['/auth/register']">
+        <ion-item routerLink="/auth/register">
           <ion-icon slot="start" color="primary" name="key"></ion-icon>
           Register
         </ion-item>
 
-        <ion-item [routerLink]="['/auth/forgot']">
+        <ion-item routerLink="/auth/forgot">
           <ion-icon slot="start" color="primary" name="medical"></ion-icon>
           Forgot
         </ion-item> 
         -->
 
         <ion-item routerLink (click)="onLogout()">
-          <ion-icon slot="start" color="primary" name="power"></ion-icon>
+          <ion-icon slot="start" color="primary" name="exit"></ion-icon>
           Logout
         </ion-item>
       </ion-list>
