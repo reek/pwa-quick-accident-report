@@ -42,7 +42,7 @@ export class NotifyService {
 
       // Checks if should display install popup notification:
       if (isIos() && !isStandalone()) {
-        this.show('To install App tap ⬤ then "Add to Home Screen"', 10000);
+        this.show('To install App tap "Share" then "Add to Home Screen"', 10000);
       }
 
     });
