@@ -2,8 +2,10 @@
 # http://git-scm.com/docs/gitignore
 
 # My Rules
-src/environments/environment.prod.ts
+src/environments/
 *.spec.ts
+android/
+
 
 *~
 *.sw[mnpcod]
