@@ -1,0 +1,45 @@
+<app-header title="Accident"></app-header>
+
+<ion-content>
+
+  <!-- https://www.ch.ch/fr/accident-circulation/ -->
+  <ion-list>
+    <app-item-title title="What to do" icon="alert"></app-item-title>
+
+    <ion-item-divider></ion-item-divider>
+
+    <ion-item>
+      <ion-badge slot="start">1</ion-badge>
+      <ion-label>Evaluate the situation.</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-badge slot="start">2</ion-badge>
+      <ion-label>Secure the scene of the accident.</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-badge slot="start">3</ion-badge>
+      <ion-label>Give first aid</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-badge size="" slot="start">4</ion-badge>
+      <ion-label>Alert the emergency services</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-badge slot="start">5</ion-badge>
+      <ion-label>Take care of the wounded</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="start" routerLink="list">
+    <ion-fab-button>
+      <ion-icon name="filing"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab vertical="bottom" horizontal="end" routerLink="new">
+    <ion-fab-button>
+      <ion-icon name="add-circle"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>
