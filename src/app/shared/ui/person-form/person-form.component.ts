@@ -1,9 +1,11 @@
 
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IPersonal } from '../../models/personal/personal';
+
 import { ValidateIsEmailValid } from '../../validators/field.validator';
 import { phoneNumberPattern } from '../../validators/patterns';
+import { IPerson } from '../../models/person/person';
+import { OsmPlace } from 'src/app/core/services/osm/osm.service';
 
 @Component({
   selector: 'app-person-form',
@@ -13,8 +15,10 @@ import { phoneNumberPattern } from '../../validators/patterns';
 export class PersonFormComponent implements OnInit {
 
   @Input() public title: string = 'person form'
-  @Input() public values: IPersonal
-  @Output() public onSubmitted: EventEmitter<IPersonal> = new EventEmitter<IPersonal>()
+  @Input() public values: IPerson
+  @Input() public readonly: boolean = false
+  @Input() public button: string = "Done"
+  @Output() public onSubmitted: EventEmitter<IPerson> = new EventEmitter<IPerson>()
 
   public form: FormGroup
 
@@ -40,22 +44,35 @@ export class PersonFormComponent implements OnInit {
       lastName: ['', [Validators.minLength(3)]],
       birthDate: ['', [Validators.required]],
       email: ['', [ValidateIsEmailValid]],
-      phoneNumber: ['', [Validators.pattern(phoneNumberPattern)]],
+      phone: ['', [Validators.pattern(phoneNumberPattern)]],
       drivingLicense: ['', [Validators.required]],
+      address: this.formBuilder.group({
+        street: ['', [Validators.required]],
+        city: ['', [Validators.required]],
+        state: ['', [Validators.required]],
+        postcode: ['', [Validators.required]],
+        country: ['', [Validators.required]],
+        latitude: ['', [Validators.required]],
+        longitude: ['', [Validators.required]],
+      })
     })
   }
 
   public onSubmit() {
     if (this.form.valid) {
-      const payload: IPersonal = this.form.value
+      const payload: IPerson = this.form.value
       this.onSubmitted.emit(payload)
     }
   }
 
   public updateBirthDate(event: CustomEvent) {
-    const datetime = event.detail.value
-    this.form.get("birthDate").setValue(datetime)
-    //console.log(event)
+    const value = event.detail.value
+    const date = value.split("T").shift()
+    this.form.get("birthDate").setValue(date)
+  }
+
+  public updateAddress(place: OsmPlace) {
+    this.form.get("address").patchValue(place)
   }
 
 }

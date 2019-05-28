@@ -1,53 +1,109 @@
 ￼<form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-  <ion-item-divider class="ion-padding-top">
-    <ion-title color="primary">{{title}}</ion-title>
-  </ion-item-divider>
-  <!-- placeholder="Male" value="Male" -->
-  <ion-item>
-    <ion-label>Gender</ion-label>
-    <ion-select formControlName="gender" required>
-      <ion-select-option value="0">Male</ion-select-option>
-      <ion-select-option value="1">Female</ion-select-option>
-    </ion-select>
-  </ion-item>
+  <ion-list>
+    <app-item-title [title]="title" icon="person"></app-item-title>
 
-  <ion-item>
-    <ion-label>FirstName</ion-label>
-    <ion-input type="text" formControlName="firstName" [value]="form.controls.firstName.value | titlecase" required>
-    </ion-input>
-  </ion-item>
+    <!-- placeholder="Male" value="Male" -->
+    <ion-item>
+      <ion-label>Gender</ion-label>
+      <ion-input *ngIf="readonly" formControlName="gender" readonly required></ion-input>
+      <ion-select *ngIf="!readonly" formControlName="gender" placeholder="Select One" value="form.controls.gender.value"
+        required>
+        <ion-select-option value="male">Male</ion-select-option>
+        <ion-select-option value="female">Female</ion-select-option>
+      </ion-select>
+    </ion-item>
 
-  <ion-item>
-    <ion-label>LastName</ion-label>
-    <ion-input type="text" formControlName="lastName" [value]="form.controls.lastName.value | titlecase" required></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label>FirstName</ion-label>
+      <ion-input type="text" formControlName="firstName" [value]="form.controls.firstName.value | titlecase"
+        [readonly]="readonly" required>
+      </ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label>BirthDate</ion-label>
-    <ion-input type="hidden" formControlName="birthDate" required>
-    </ion-input>
-    <!-- https://ionicframework.com/docs/api/datetime -->
-    <ion-datetime (ionChange)="updateBirthDate($event)" [value]="values?.birthDate || ''"
-      display-format="MMMM DD, YYYY">
-    </ion-datetime>
-  </ion-item>
+    <ion-item>
+      <ion-label>LastName</ion-label>
+      <ion-input type="text" formControlName="lastName" [value]="form.controls.lastName.value | titlecase"
+        [readonly]="readonly" required>
+      </ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label>PhoneNumber</ion-label>
-    <ion-input type="text" formControlName="phoneNumber" required></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label>BirthDate</ion-label>
+      <ion-input *ngIf="readonly" formControlName="birthDate" [readonly]="readonly" required>
+      </ion-input>
+      <!-- https://ionicframework.com/docs/api/datetime -->
+      <ion-datetime *ngIf="!readonly" (ionChange)="updateBirthDate($event)" [readonly]="readonly"
+        [value]="values?.birthDate || ''" display-format="MMMM DD, YYYY">
+      </ion-datetime>
+    </ion-item>
 
-  <ion-item>
-    <ion-label>Email</ion-label>
-    <ion-input type="text" formControlName="email" required></ion-input>
-  </ion-item>
+    <app-item-title title="Contact" icon="chatboxes"></app-item-title>
 
-  <ion-item>
-    <ion-label>Driving License</ion-label>
-    <ion-input type="text" formControlName="drivingLicense" required></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label>Phone</ion-label>
+      <ion-input type="text" formControlName="phone" [readonly]="readonly" required></ion-input>
+    </ion-item>
 
-  <ion-button expand="block" type="submit" [disabled]="!form.valid">Next</ion-button>
+    <ion-item>
+      <ion-label>Email</ion-label>
+      <ion-input type="text" formControlName="email" [readonly]="readonly" required></ion-input>
+    </ion-item>
+
+    <app-item-title title="License" icon="card"></app-item-title>
+
+    <ion-item>
+      <ion-label>Driving</ion-label>
+      <ion-input type="text" formControlName="drivingLicense" [readonly]="readonly" required></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-list formGroupName="address">
+    <ion-item>
+      <ion-icon color="primary" name="pin"></ion-icon>
+      <ion-title color="primary">Address</ion-title>
+      <!-- <ion-icon slot="end" name="locate" (click)="onLocate()"></ion-icon> -->
+    </ion-item>
+
+    <app-search-address *ngIf="!readonly" (onSelected)="updateAddress($event)"></app-search-address>
+
+    <ion-item>
+      <ion-label>Street</ion-label>
+      <ion-input type="text" formControlName="street" [readonly]="readonly" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Postcode</ion-label>
+      <ion-input type="text" formControlName="postcode" [readonly]="readonly" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>City</ion-label>
+      <ion-input type="text" formControlName="city" [readonly]="readonly" required>
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>State</ion-label>
+      <ion-input type="text" formControlName="state" [readonly]="readonly">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Country</ion-label>
+      <ion-input type="text" formControlName="country" [readonly]="readonly" required>
+      </ion-input>
+    </ion-item>
+
+    <ion-item class="ion-hide">
+      <ion-input type="hidden" formControlName="longitude" [readonly]="readonly" required></ion-input>
+      <ion-input type="hidden" formControlName="latitude" [readonly]="readonly" required></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-button *ngIf="!readonly" type="submit" expand="block" [disabled]="!form.valid">
+    <ion-icon name="checkmark-circle" slot="end"></ion-icon>{{ button }}
+  </ion-button>
 
 </form>
