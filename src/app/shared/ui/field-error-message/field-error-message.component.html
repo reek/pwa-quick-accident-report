@@ -1,8 +1,8 @@
-<div *ngIf="control && control.invalid && (control.dirty || control.touched)" class="alert alert-danger">
+<div *ngIf="control && control.invalid && (control.dirty || control.touched)" class="ion-text-right">
   <ion-text color="danger" *ngIf="control.errors.required">
     Required.
   </ion-text>
-  <ion-text color="danger" *ngIf="control.errors.email || control.errors.validEmail">
+  <ion-text color="danger" *ngIf="control.value.length > 0 && (control.errors.email || control.errors.validEmail)">
     Email is invalid.
   </ion-text>
   <ion-text color="danger" *ngIf="control.errors?.emailTaken">
