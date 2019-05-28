@@ -1,7 +1,7 @@
 {
   "name": "Quick Accident Report",
   "short_name": "Qar App",
-  "theme_color": "#000000",
+  "theme_color": "#FF1B1C",
   "background_color": "#ffffff",
   "display": "standalone",
   "scope": "/",
