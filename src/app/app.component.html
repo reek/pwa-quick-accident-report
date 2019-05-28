@@ -4,7 +4,7 @@
 
   <ion-menu side="end" menuId="first">
     <ion-header>
-      <ion-toolbar color="dark" *ngIf="(userData$ | async) as user">
+      <ion-toolbar color="primary" *ngIf="(userData$ | async) as user">
         <ion-buttons slot="end">
           <ion-button (click)="closeMenu()">
             <ion-icon slot="start" name="close"></ion-icon>
@@ -12,7 +12,7 @@
         </ion-buttons>
         <!-- <ion-title>Menu</ion-title> -->
         <!-- /assets/images/avatar2.png -->
-        <ion-item color="dark">
+        <ion-item color="primary">
           <ion-avatar slot="start">
             <img [src]="user.avatar" />
           </ion-avatar>
