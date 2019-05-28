@@ -17,14 +17,14 @@ export class OsmService {
   }
 
   public getPlacesByStreet(street: string): Observable<OsmPlace[]> {
-    return this.http.get(`${this.apiEndpoint}/?format=json&limit=10&addressdetails=1&street=${street.replace(/ /g, "+")}`)
+    return this.http.get(`${this.apiEndpoint}/?format=json&limit=10&addressdetails=1&countrycodes=CH&street=${street.replace(/ /g, "+")}`)
       .pipe(
         tap((places: any) => console.log('osm street', places)),
         map((places: any) => places.map((place: any) => new OsmPlace(place))))
   }
 
   public getPlacesByCoords(coords: ICoords): Observable<OsmPlace> {
-    return this.http.get(`${this.apiEndpoint}/reverse?format=json&addressdetails=1&zoom=18&lat=${coords.latitude}&lon=${coords.longitude}`)
+    return this.http.get(`${this.apiEndpoint}/reverse?format=json&addressdetails=1&countrycodes=CH&zoom=18&lat=${coords.latitude}&lon=${coords.longitude}`)
       .pipe(
         tap((place: any) => console.log('osm reverse', place)),
         map((place: any) => new OsmPlace(place)))
@@ -33,7 +33,7 @@ export class OsmService {
 }
 
 export interface IOsmPlace {
-  address: string
+  address?: string
   street: string
   city: string
   state: string
