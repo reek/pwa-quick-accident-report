@@ -10,10 +10,17 @@ export interface IRegister {
   confirmPassword: string
 }
 
-export interface IForgot {
+export interface IForgotPassword {
+  baseUrl: string
   email: string
+}
+
+export interface IResetPassword {
+  token?: string
+  password: string
 }
 
 export interface IEmail {
   email: string
 }
+
