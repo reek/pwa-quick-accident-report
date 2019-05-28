@@ -1,5 +1,5 @@
 export enum EVehicleType {
-  CAR, MOTORBIKE, BIKE, TRUCK, BUS
+  CAR = "car", MOTORBIKE = "motorbike", BIKE = "bike", TRUCK = "truck", BUS = "bus"
 }
 export interface IVehicle {
   _id?: string
