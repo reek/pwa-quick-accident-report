@@ -2,27 +2,40 @@
 
 <ion-content>
 
-  <app-ol-map [height]="height" (onWatched)="getPlace($event)"></app-ol-map>
+  <app-ol-map height="200px" (onWatched)="getPlace($event)"></app-ol-map>
 
-  <ion-item-divider class="ion-padding-top">
-      <ion-title color="primary">Your Location</ion-title>
-    </ion-item-divider>
+  <app-item-title title="Location" icon="compass"></app-item-title>
 
-  <ion-item>
-    <div *ngIf="(place$ | async) as place">
-      <p><b>Longitude:</b> {{place.longitude}}</p>
-      <p><b>Latitude:</b> {{place.latitude}}</p>
-      <p><b>Address:</b><ion-text class="ion-text-justify"> {{place.display_name}}</ion-text> </p>
-    </div>
-  </ion-item>
+  <ion-grid *ngIf="(place$ | async) as place">
+    <ion-row>
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="stacked">Address</ion-label>
+          <ion-textarea rows="4" readonly [value]="place.address"></ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="stacked">Longitude</ion-label>
+          <ion-input type="text" readonly [value]="place.longitude"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="stacked">Latitude</ion-label>
+          <ion-input type="text" readonly [value]="place.latitude"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-  <ion-item-divider class="ion-padding-top">
-      <ion-title color="primary">Emergency Services</ion-title>
-    </ion-item-divider>
+  <app-item-title title="Services" icon="call"></app-item-title>
 
   <ion-item *ngFor="let contact of contacts">
     <ion-icon slot="start" [name]="contact.icon"></ion-icon>
-    <ion-label><b>{{contact.phone}}</b> {{contact.name}}</ion-label>
+    <ion-label>{{ contact.name }}</ion-label>
     <ion-fab-button color="success" size="small" shape="" (click)="onCall(contact.phone)">
       <ion-icon name="call"></ion-icon>
     </ion-fab-button>
