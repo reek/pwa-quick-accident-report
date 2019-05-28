@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OsmService } from 'src/app/core/services/osm/osm.service';
 import { Observable } from 'rxjs';
+import { ICoords } from 'src/app/core/services/geolocation/geolocation.service';
 
 @Component({
   selector: 'app-emergency-page',
@@ -9,11 +10,9 @@ import { Observable } from 'rxjs';
 })
 export class EmergencyPageComponent implements OnInit {
 
-  public height: string = "200px"
-  public coords: { longitude: number, latitude: number }
   public place$: Observable<{}>
   public contacts: Object[] = [{
-    icon: "notifications",
+    icon: "megaphone",
     name: "Emergency",
     phone: "112"
   }, {
@@ -29,12 +28,12 @@ export class EmergencyPageComponent implements OnInit {
     name: "Ambulances",
     phone: "144"
   }, {
-    icon: "help-buoy",
-    name: "REGA air rescue",
+    icon: "airplane",
+    name: "Air Rescue (REGA)",
     phone: "1414"
   }, {
     icon: "build",
-    name: "TCS help",
+    name: "Mechanic Help (TCS)",
     phone: "0800 140 140"
   }]
 
@@ -47,8 +46,8 @@ export class EmergencyPageComponent implements OnInit {
     location.href = 'tel:' + phoneNumber.replace(/\s+/, '')
   }
 
-  public getPlace(coords: Coordinates) {
-    this.place$ = this.osmService.getPlacesByCoords(coords.longitude, coords.latitude)
+  public getPlace(coords: ICoords): void {
+    this.place$ = this.osmService.getPlacesByCoords(coords)
   }
 
 }
