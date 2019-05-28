@@ -4,8 +4,10 @@
 
 export const environment = {
   production: false,
-  apiEndpoint: 'http://localhost:8080/api',
-  authTokenStorageKey: "tJrmvvEJGazZYOHzWvIX"
+  apiEndpoint: "http://localhost:8080/api",
+  authTokenStorageKey: "authToken",
+  loginEmail: "test@mail.com",
+  loginPassword: "1234",
 };
 
 /*
