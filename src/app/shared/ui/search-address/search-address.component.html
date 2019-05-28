@@ -1,0 +1,13 @@
+<ion-item>
+  <ion-searchbar animated debounce="500" (ionChange)="onSearch($event)" (ionClear)="onReset()"></ion-searchbar>
+  <ion-button fill="clear" (click)="onLocate()">
+    <ion-icon size="large" name="locate"></ion-icon>
+  </ion-button>
+</ion-item>
+
+<div *ngIf="(places$ | async) as places" class="datalist">
+  <ion-item *ngFor="let place of places">
+    <ion-icon slot="start" name="pin"></ion-icon>
+    <ion-label (click)="onSelect(place)" text-wrap>{{ place.address }}</ion-label>
+  </ion-item>
+</div>
