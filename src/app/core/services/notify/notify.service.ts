@@ -14,6 +14,11 @@ export class NotifyService {
     const toast = await this.toastController.create({
       message,
       duration,
+      //color: "light",
+      //header: "Notification",
+      showCloseButton: true,
+      closeButtonText: "✖",
+      translucent: true,
       // buttons: [{
       //   text: 'Done',
       //   role: 'cancel',
