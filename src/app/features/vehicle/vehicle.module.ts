@@ -5,15 +5,13 @@ import { VehiclePageComponent } from './containers/vehicle-page/vehicle-page.com
 import { VehicleListComponent } from './containers/vehicle-list/vehicle-list.component';
 import { VehicleViewComponent } from './containers/vehicle-view/vehicle-view.component';
 import { VehicleNewComponent } from './containers/vehicle-new/vehicle-new.component';
-import { VehicleFormComponent } from 'src/app/shared/ui/vehicle-form/vehicle-form.component';
 
 @NgModule({
   declarations: [
     VehiclePageComponent,
     VehicleListComponent,
     VehicleViewComponent,
-    VehicleNewComponent,
-    VehicleFormComponent],
+    VehicleNewComponent],
   imports: [
     SharedModule,
     RouterModule.forChild([
