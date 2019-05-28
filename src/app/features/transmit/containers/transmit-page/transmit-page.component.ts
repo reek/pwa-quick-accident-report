@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import QRCode from 'qrcode'
-import { PersonalService } from 'src/app/features/personal/personal.service';
-import { IPersonal } from 'src/app/shared/models/personal/personal';
+import { UserService } from 'src/app/core/services/user/user.service';
+import { IPerson, Person } from 'src/app/shared/models/person/person';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-transmit-page',
@@ -10,36 +11,35 @@ import { IPersonal } from 'src/app/shared/models/personal/personal';
 })
 export class TransmitPageComponent implements OnInit {
 
-  public qrCode: string
+  public qrcode: string
   public email: string
-  public data: IPersonal
+  public text: string
 
   constructor(
-    private personalService: PersonalService) { }
+    private userService: UserService) { }
 
   public ngOnInit() {
-    this.personalService.getPersonal()
-      .subscribe((data: IPersonal) => {
-        this.data = data
-        this.generateQRCode(data)
-      })
+    const subs = this.userService.getUserPersonal()
+      .pipe(
+        map((data: IPerson) => new Person(data)))
+      .subscribe((data: Person) => {
+        this.text = data.toPrettyText()
+        this.generateQRCode(this.text)
+      }, (err: any) => console.error("getUserPersonal", err),
+        () => subs.unsubscribe());
   }
 
-  public generateQRCode(data: IPersonal) {
+  public generateQRCode(text: string) {
     // doc: https://www.npmjs.com/package/qrcode#usage
-    QRCode.toDataURL(JSON.stringify(data))
-      .then(url => {
-        this.qrCode = url
-      })
-      .catch(err => {
-        console.error(err)
-      })
+    QRCode.toDataURL(text)
+      .then((dataUrl: string) => this.qrcode = dataUrl)
+      .catch((err: any) => console.error(err))
   }
 
   public onSendEmail() {
-    if (this.email && this.data) {
-      console.log(this.email, this.data)
-      /* return this.http.put(`${env.apiEndpoint}/users/personal`, payload) */
+    if (this.email && this.text) {
+      console.log(this.email, this.text)
+      /* return this.http.put(`${env.apiEndpoint}/users/data`, payload) */
     }
   }
 
