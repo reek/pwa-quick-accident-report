@@ -1,15 +1,22 @@
-import { IAddress } from '../address/address';
-import { IPicture } from '../picture/picture';
+import { IOwmWeather } from 'src/app/core/services/owm/owm.service';
+import { IOsmPlace } from 'src/app/core/services/osm/osm.service';
+import { IVehicle } from '../vehicle/vehicle';
+import { IPerson } from '../person/person';
+import { ITakePicture } from '../take-picture/take-picture';
+export interface IAccidentLocation {
+    date: string
+    time: string
+    weather: IOwmWeather,
+    address: IOsmPlace
+}
 
 export interface IAccident {
     _id?: string
-    date: string
-    time: string
-    address: IAddress
-    images: IPicture[]
-    description?: string
+    location: IAccidentLocation
+    images: ITakePicture[]
+    thirdPartyPerson: IPerson
+    thirdPartyVehicle: IVehicle
     notes?: string
-    contacts?: any
 }
 
 export class Accident { }
