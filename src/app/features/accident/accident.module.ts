@@ -6,9 +6,8 @@ import { AccidentListComponent } from './containers/accident-list/accident-list.
 import { AccidentNewComponent } from './containers/accident-new/accident-new.component';
 import { AccidentViewComponent } from './containers/accident-view/accident-view.component';
 import { LocationFormComponent } from 'src/app/shared/ui/location-form/location-form.component'
-import { WhatTodoFormComponent } from 'src/app/shared/ui/what-todo-form/what-todo-form.component';
-import { InsuranceFormComponent } from 'src/app/shared/ui/insurance-form/insurance-form.component';
-import { ThirdPartyFormComponent } from 'src/app/shared/ui/third-party-form/third-party-form.component';
+import { NotesFormComponent } from 'src/app/shared/ui/notes-form/notes-form.component';
+import { AccidentWhatTodoComponent } from './containers/accident-what-todo/accident-what-todo.component';
 
 @NgModule({
   declarations: [
@@ -16,22 +15,22 @@ import { ThirdPartyFormComponent } from 'src/app/shared/ui/third-party-form/thir
     AccidentListComponent,
     AccidentNewComponent,
     AccidentViewComponent,
-    WhatTodoFormComponent,
-    LocationFormComponent, 
-    InsuranceFormComponent, 
-    ThirdPartyFormComponent],
+    AccidentWhatTodoComponent,
+    LocationFormComponent,
+    NotesFormComponent],
   imports: [
     SharedModule,
     RouterModule.forChild([
       {
         path: '',
         component: AccidentPageComponent, children: [
+          { path: "", component: AccidentWhatTodoComponent },
           { path: "list", component: AccidentListComponent },
           { path: "new", component: AccidentNewComponent },
           { path: "view/:id", component: AccidentViewComponent },
           {
             path: '',
-            redirectTo: 'new',
+            redirectTo: 'whattodo',
             pathMatch: 'full'
           }
         ]
