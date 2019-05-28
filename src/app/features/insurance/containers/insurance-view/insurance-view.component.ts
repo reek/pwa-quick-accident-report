@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map, filter, tap, switchMap } from 'rxjs/operators';
-import { IInsurance } from 'src/app/shared/models/insurance/insurance';
+import { map, tap, switchMap } from 'rxjs/operators';
+import { Insurance } from 'src/app/shared/models/insurance/insurance';
 import { InsuranceService } from '../../insurance.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { InsuranceService } from '../../insurance.service';
 })
 export class InsuranceViewComponent implements OnInit {
 
-  public insurance$: Observable<IInsurance>
+  public insurance$: Observable<Insurance>
   private id$: Observable<String>
 
   constructor(
