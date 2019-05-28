@@ -1,0 +1,14 @@
+￼<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+  <app-item-title title="Notes" icon="clipboard"></app-item-title>
+
+  <ion-item>
+    <ion-textarea rows="15" formControlName="notes"
+      placeholder="Add any additional information that might be useful to you!" [readonly]="readonly"></ion-textarea>
+  </ion-item>
+
+  <ion-button *ngIf="!readonly" type="submit" expand="block" [disabled]="!form.valid">
+    <ion-icon name="checkmark-circle" slot="end"></ion-icon>{{ button }}
+  </ion-button>
+
+</form>
