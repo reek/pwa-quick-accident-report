@@ -1,7 +1,10 @@
+import { Observable } from 'rxjs';
+
 export interface IInsurance {
   _id?: string
+  description: string
   logo: string
-  compagny: string
+  company: string
   phone: string
   email: string
   website: string
@@ -10,7 +13,8 @@ export interface IInsurance {
 export class Insurance implements IInsurance {
   public _id: string
   public logo: string
-  public compagny: string
+  public description: string
+  public company: string
   public phone: string
   public email: string
   public website: string
@@ -21,15 +25,16 @@ export class Insurance implements IInsurance {
 
   public fromData(data: IInsurance) {
     this._id = data._id || null
+    this.description = data.description || ''
     this.logo = data.logo || ''
-    this.compagny = data.compagny || ''
+    this.company = data.company || ''
     this.phone = data.phone || ''
     this.email = data.email || ''
     this.website = data.website || ''
   }
 
   public toString(): string {
-    return `#${this._id} - ${this.compagny} - ${this.phone}`
+    return `#${this._id} - ${this.company} - ${this.phone}`
   }
 
   public getDomain(): string {
@@ -49,4 +54,15 @@ export class Insurance implements IInsurance {
     window.open(this.website);
   }
 
+  public getWebsiteDescription(): any {
+    return fetch(`https://cors-anywhere.herokuapp.com/${this.website}`)
+      .then(res => res.text())
+      .then(html => {
+        const parser = new DOMParser();
+        const htmlDoc = parser.parseFromString(html, 'text/html');
+        const description = htmlDoc.querySelector('meta[name="description"]').getAttribute("content")
+        console.log(description)
+        return description
+      }).catch(err => console.error(err));
+  }
 }
