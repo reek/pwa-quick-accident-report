@@ -1,5 +1,7 @@
 <div id="map" [style.width]="width" [style.height]="height">
-    <ion-button shape="round" color="primary" (click)="getCurrentPosition()">
-        <ion-icon slot="icon-only" name="locate"></ion-icon>
-    </ion-button>
+    <ion-fab vertical="bottom" horizontal="end">
+        <ion-fab-button color="light" size="small" type="button" (click)="getCurrentPosition()">
+            <ion-icon name="locate"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
 </div>
