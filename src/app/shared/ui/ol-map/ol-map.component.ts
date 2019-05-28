@@ -8,8 +8,7 @@ import VectorSource from 'ol/source/Vector';
 import XYZ from 'ol/source/XYZ';
 import { Tile as TileLayer, Vector as VectorLayer } from 'ol/layer';
 import { Icon, Style } from 'ol/style';
-import { fromLonLat } from 'ol/proj.js';
-
+import { fromLonLat, toLonLat } from 'ol/proj.js';
 import { LoadingController } from '@ionic/angular';
 import { GeolocationOptions, Capacitor, Toast, Geolocation } from '@capacitor/core';
 import { MapBrowserPointerEvent } from 'openlayers';
@@ -23,17 +22,15 @@ import { MapBrowserPointerEvent } from 'openlayers';
 export class OlMapComponent implements OnInit {
 
   @Input() coords: { longitude: number, latitude: number }
-  @Input() height: string = "150px"
+  @Input() height: string = "50%"
   @Input() width: string = "100%"
   @Input() zoom: number = 18
-  @Output() onClicked: EventEmitter<any> = new EventEmitter()
   @Output() onWatched: EventEmitter<any> = new EventEmitter()
 
   private iconFeature: Feature
   private iconStyle: Style
   private map: Map
   private view: View
-  private position: any
   private tileLayer: TileLayer
   private vectorSource: VectorSource
   private vectorLayer: VectorLayer
@@ -52,7 +49,7 @@ export class OlMapComponent implements OnInit {
 
     // open waiting spinner
     const loading: HTMLIonLoadingElement = await this.loadingCtrl.create({
-      message: 'watching position...'
+      message: 'Watching position...'
     });
     await loading.present();
 
@@ -78,25 +75,28 @@ export class OlMapComponent implements OnInit {
     this.coords = coordinates.coords;
     this.onWatched.emit(this.coords)
     loading.dismiss();
-    if (this.map)
-      this.setPosition(this.coords)
+    if (this.map) {
+      const coordXY = fromLonLat([this.coords.longitude, this.coords.latitude])
+      this.setPosition(coordXY)
+    }
   }
 
   private initMap() {
 
-    const position = fromLonLat([this.coords.longitude, this.coords.latitude])
-    console.log("initMap", position, this.coords.longitude, this.coords.latitude)
+    const coordXY = fromLonLat([this.coords.longitude, this.coords.latitude])
+    console.log("initMap", coordXY, this.coords.longitude, this.coords.latitude)
 
     // Icon
     this.iconFeature = new Feature({
-      geometry: new Point(position),
+      geometry: new Point(coordXY),
       name: 'You are here!'
     });
 
     this.iconStyle = new Style({
       image: new Icon({
-        anchor: [0.5, 0.5],
+        anchor: [.43, 1], // position of icon
         scale: .15,
+        //size: [48, 48], // not work
         src: 'assets/images/marker/marker-3.png'
       })
     });
@@ -119,7 +119,7 @@ export class OlMapComponent implements OnInit {
     });
 
     this.view = new View({
-      center: position,
+      center: coordXY,
       zoom: this.zoom
     })
 
@@ -132,39 +132,17 @@ export class OlMapComponent implements OnInit {
 
     // listener event Map
     this.map.on('singleclick', (evt: MapBrowserPointerEvent) => {
-      console.log(evt)
-      this.onClicked.emit(evt.coordinate);
-      //this.setPosition(evt.coordinate)
+      const coordXY = evt.coordinate
+      const [longitude, latitude] = toLonLat(coordXY)
+      this.onWatched.emit({ longitude, latitude });
+      this.setPosition(coordXY)
     });
 
   }
 
-  private setPosition(coords) {
-    const position = fromLonLat([coords.longitude, coords.latitude])
-    this.iconFeature.setGeometry(new Point(position));
-    this.view.setCenter(position);
+  private setPosition(coordXY) {
+    this.iconFeature.setGeometry(new Point(coordXY));
+    this.view.setCenter(coordXY);
   }
 
 }
-
-
-/*             OpenCycleMap
-https://tile.thunderforest.com/cycle/{z}/{x}/{y}.png?apikey=7fd8a4ab716e4c278f951db2fe2e2147
-Transport
-https://tile.thunderforest.com/transport/{z}/{x}/{y}.png?apikey=7fd8a4ab716e4c278f951db2fe2e2147
-Landscape
-https://tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey=7fd8a4ab716e4c278f951db2fe2e2147
-Outdoors
-https://tile.thunderforest.com/outdoors/{z}/{x}/{y}.png?apikey=7fd8a4ab716e4c278f951db2fe2e2147
-Transport Dark
-https://tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png?apikey=7fd8a4ab716e4c278f951db2fe2e2147
-Spinal Map
-https://tile.thunderforest.com/spinal-map/{z}/{x}/{y}.png?apikey=7fd8a4ab716e4c278f951db2fe2e2147
-Pioneer
-https://tile.thunderforest.com/pioneer/{z}/{x}/{y}.png?apikey=7fd8a4ab716e4c278f951db2fe2e2147
-Mobile Atlas
-https://tile.thunderforest.com/mobile-atlas/{z}/{x}/{y}.png?apikey=7fd8a4ab716e4c278f951db2fe2e2147
-Neighbourhood
-https://tile.thunderforest.com/neighbourhood/{z}/{x}/{y}.png?apikey=7fd8a4ab716e4c278f951db2fe2e2147 */
-
-//url: "https://tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey=7fd8a4ab716e4c278f951db2fe2e2147"
