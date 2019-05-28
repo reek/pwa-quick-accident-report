@@ -2,6 +2,8 @@
 
 <ion-content>
 
+  <app-item-title title="Insurances" icon="umbrella"></app-item-title>
+
   <ion-searchbar (ionChange)="onSearch($event)" showCancelButton cancelButtonText="Custom Cancel"></ion-searchbar>
 
   <div *ngIf="(insurances$ | async | searchFilter:filterTerm) as insurances; else empty">
@@ -10,7 +12,7 @@
         <img [src]="'assets/images/insurance/square/' + insurance.logo">
       </ion-thumbnail>
       <ion-label>
-        <h2>{{ insurance.compagny }}</h2>
+        <h2>{{ insurance.company }}</h2>
         <p>{{ insurance.phone }}</p>
       </ion-label>
       <ion-button fill="outline" slot="end" [routerLink]="['view', insurance._id]">More</ion-button>
