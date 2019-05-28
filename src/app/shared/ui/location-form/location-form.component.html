@@ -1,71 +1,141 @@
-￼<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<app-ol-map (onWatched)="onMapCoords($event)"></app-ol-map>
 
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-  <ion-item-divider class="ion-padding-top">
-    <ion-title color="primary">Date & Time</ion-title>
-  </ion-item-divider>
+  <app-item-title title="Datetime" icon="calendar"></app-item-title>
 
-  <ion-item>
-    <ion-label>Date</ion-label>
-    <ion-input type="hidden" formControlName="date" [value]="date" required></ion-input>
-    <!-- https://ionicframework.com/docs/api/datetime -->
-    <ion-datetime (ionChange)="updateDate($event)" [placeholder]="date" display-format="MMMM DD, YYYY">
-    </ion-datetime>
-  </ion-item>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <!-- https://ionicframework.com/docs/api/datetime -->
+        <ion-item>
+          <ion-label position="stacked">Date</ion-label>
+          <ion-input *ngIf="readonly" formControlName="date" readonly required></ion-input>
+          <ion-datetime *ngIf="!readonly" (ionChange)="updateDate($event)" [placeholder]="date"
+            display-format="MMMM DD, YYYY">
+          </ion-datetime>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="stacked">Time</ion-label>
+          <ion-input *ngIf="readonly" formControlName="time" readonly required></ion-input>
+          <ion-datetime *ngIf="!readonly" (ionChange)="updateTime($event)" [placeholder]="time" display-format="HH:mm">
+          </ion-datetime>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-  <ion-item>
-    <ion-label>Time</ion-label>
-    <ion-input type="hidden" formControlName="time" [value]="time" required></ion-input>
-    <!-- https://ionicframework.com/docs/api/datetime -->
-    <ion-datetime (ionChange)="updateTime($event)" [placeholder]="time" display-format="HH:mm">
-    </ion-datetime>
-  </ion-item>
-
-
-  <app-ol-map (onWatched)="getMapCoords($event)"></app-ol-map>
-
-  <ion-item-divider class="ion-padding-top">
-    <ion-title color="primary">Location</ion-title>
-  </ion-item-divider>
+  <app-item-title title="Location" icon="compass"></app-item-title>
 
   <div formGroupName="address">
-
-    <ion-item>
-      <ion-label>Street</ion-label>
-      <ion-input type="text" formControlName="street" required></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>City</ion-label>
-      <ion-input type="text" formControlName="city" required></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>State</ion-label>
-      <ion-input type="text" formControlName="state" required></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Postcode</ion-label>
-      <ion-input type="text" formControlName="postcode" required></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Country </ion-label>
-      <ion-input type="text" formControlName="country" required></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Latitude</ion-label>
-      <ion-input type="text" formControlName="latitude" required></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Longitude</ion-label>
-      <ion-input type="text" formControlName="longitude" required></ion-input>
-    </ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="stacked">Street</ion-label>
+            <ion-input type="text" formControlName="street" autocapitalize [readonly]="readonly" required></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="stacked">City</ion-label>
+            <ion-input type="text" formControlName="city" autocapitalize [readonly]="readonly" required></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="stacked">State</ion-label>
+            <ion-input type="text" formControlName="state" autocapitalize [readonly]="readonly" required></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="stacked">Postcode</ion-label>
+            <ion-input type="text" formControlName="postcode" [readonly]="readonly" required></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="stacked">Country </ion-label>
+            <ion-input type="text" formControlName="country" autocapitalize [readonly]="readonly" required></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="stacked">Latitude</ion-label>
+            <ion-input type="text" formControlName="latitude" [readonly]="readonly" required></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="stacked">Longitude</ion-label>
+            <ion-input type="text" formControlName="longitude" [readonly]="readonly" required></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
 
-  <ion-button type="submit" expand="block" [disabled]="!form.valid">Next</ion-button>
+  <app-item-title title="Weather" icon="cloud"></app-item-title>
+
+  <div formGroupName="weather">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="stacked">Forecast</ion-label>
+            <ion-input type="hidden" formControlName="icon" readonly></ion-input>
+            <ion-input type="text" formControlName="forecast" readonly></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="stacked">Temperature</ion-label>
+            <ion-input type="text" formControlName="temperature" readonly></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="stacked">Wind</ion-label>
+            <ion-input type="text" formControlName="wind" readonly></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="stacked">Pressure</ion-label>
+            <ion-input type="text" formControlName="pressure" readonly></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="stacked">Humidity</ion-label>
+            <ion-input type="text" formControlName="humidity" readonly></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="stacked">Visibility</ion-label>
+            <ion-input type="text" formControlName="visibility" readonly></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <ion-button *ngIf="!readonly" type="submit" expand="block" [disabled]="!form.valid">
+    <ion-icon name="checkmark-circle" slot="end"></ion-icon>{{ button }}
+  </ion-button>
 
 </form>

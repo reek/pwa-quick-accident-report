@@ -1,11 +1,11 @@
-import { IAccident } from './../../models/accident/accident';
+import { IAccidentLocation } from '../../models/accident/accident';
 import { distinctUntilChanged, debounceTime, filter, tap, switchMap } from 'rxjs/operators';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
-import { OsmService } from 'src/app/core/services/osm/osm.service';
+import { OsmService, OsmPlace } from 'src/app/core/services/osm/osm.service';
 import * as moment from 'moment';
-import { ICoords } from '../../models/coords/coords';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { OwmService } from 'src/app/core/services/owm/owm.service';
 
 @Component({
   selector: 'app-location-form',
@@ -15,11 +15,13 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class LocationFormComponent implements OnInit {
 
   @Input() public title: string = 'location form'
-  @Input() public values: any
-  @Output() public onSubmitted: EventEmitter<any> = new EventEmitter<any>()
+  @Input() public values: IAccidentLocation
+  @Input() public readonly: boolean = false
+  @Input() public button: string = "Done"
+  @Output() public onSubmitted: EventEmitter<IAccidentLocation> = new EventEmitter<IAccidentLocation>()
 
   public form: FormGroup
-  private subject: BehaviorSubject<any>;
+  private places: BehaviorSubject<any>;
   public places$: Observable<[]>;
   public selected: string
   public date: string = moment().format('YYYY-MM-DD')
@@ -27,13 +29,21 @@ export class LocationFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private osmService: OsmService) {
-    this.subject = new BehaviorSubject([])
-    this.places$ = this.subject.asObservable()
+    private osmService: OsmService,
+    private owmService: OwmService) {
+    this.places = new BehaviorSubject([OsmPlace])
+    this.places$ = this.places.asObservable()
   }
 
   public ngOnInit() {
     this.buildForm()
+    this.completeForm()
+  }
+
+  public completeForm() {
+    console.log("completeForm", this.values)
+    if (this.values)
+      this.form.patchValue(this.values)
   }
 
   public buildForm(): void {
@@ -48,40 +58,44 @@ export class LocationFormComponent implements OnInit {
         country: ['', [Validators.required]],
         latitude: ['', [Validators.required]],
         longitude: ['', [Validators.required]],
+      }),
+      weather: this.formBuilder.group({
+        icon: [''],
+        forecast: [''],
+        temperature: [''],
+        wind: [''],
+        pressure: [''],
+        humidity: [''],
+        visibility: [''],
       })
     })
-    this.onStreetChange()
+    //this.onStreetChange()
   }
 
-  public onStreetChange(): void {
-    // doc: https://alligator.io/angular/reactive-forms-valuechanges/
-    this.form.get('address.street').valueChanges
-      .pipe(
-        distinctUntilChanged(),
-        debounceTime(500),
-        filter(value => value.length > 5 && value != this.selected),
-        tap(value => console.log('onStreetChange', value)),
-        switchMap(value => this.osmService.getPlacesByStreet(value)))
-      .subscribe(places => {
-        console.log("getPlacesByStreet", places)
-        this.subject.next(places)
-      })
-  }
-  public updateAddress(place: any) {
+
+  public updateAddress(place: OsmPlace) {
     console.log('updateAddress_', place)
     this.selected = place.street
     this.form.get("address").patchValue(place);
-    this.subject.next([]) // reset
+    this.places.next([]) // reset
   }
 
-  public getMapCoords(coords: Coordinates) {
-    console.log(coords.latitude)
-    this.osmService.getPlacesByCoords(coords.longitude, coords.latitude)
+  public onMapCoords(coords: Coordinates) {
+
+    this.osmService.getPlacesByCoords(coords)
       .pipe(
         distinctUntilChanged())
-      .subscribe((place: any) => {
+      .subscribe((place: OsmPlace) => {
         console.log("getPlacesByCoords", place)
         this.updateAddress(place)
+      })
+
+    this.owmService.getWeatherByCoords(coords)
+      .pipe(
+        distinctUntilChanged())
+      .subscribe((weather: any) => {
+        this.form.get('weather').patchValue(weather)
+        console.log("getWeatherByCoords", weather)
       })
   }
 
@@ -100,6 +114,8 @@ export class LocationFormComponent implements OnInit {
       console.info('form accident', data);
     }
   }
+
+
 
 }
 
