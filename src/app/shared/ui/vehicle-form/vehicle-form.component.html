@@ -1,59 +1,68 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-  <ion-item-divider class="ion-padding-top">
-    <ion-title color="primary">Vehicle</ion-title>
-  </ion-item-divider>
+  <ion-list>
+    <app-item-title title="Vehicle" icon="settings"></app-item-title>
 
-  <ion-item>
-    <ion-label>Type</ion-label>
-    <ion-select placeholder="Select One" formControlName="type">
-      <ion-select-option value="0">Car</ion-select-option>
-      <ion-select-option value="1">Motorbike</ion-select-option>
-      <ion-select-option value="2">Bike</ion-select-option>
-      <ion-select-option value="3">Truck</ion-select-option>
-      <ion-select-option value="4">Bus</ion-select-option>
-    </ion-select>
-  </ion-item>
+    <ion-input type="hidden" formControlName="_id"></ion-input>
+    <ion-input type="hidden" formControlName="imageUrl"></ion-input>
 
-  <ion-item>
-    <ion-label>Make</ion-label>
-    <ion-input type="text" formControlName="make" [value]="form.controls.make.value | titlecase"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label>Type</ion-label>
+      <ion-input *ngIf="readonly" formControlName="type" [readonly]="readonly" required></ion-input>
+      <ion-select *ngIf="!readonly" placeholder="Select One" formControlName="type" required>
+        <ion-select-option value="car">Car</ion-select-option>
+        <ion-select-option value="motorbike">Motorbike</ion-select-option>
+        <ion-select-option value="bike">Bike</ion-select-option>
+        <ion-select-option value="truck">Truck</ion-select-option>
+        <ion-select-option value="bus">Bus</ion-select-option>
+      </ion-select>
+    </ion-item>
 
-  <ion-item>
-    <ion-label>Model</ion-label>
-    <ion-input type="text" formControlName="model" [value]="form.controls.model.value | titlecase"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label>Make</ion-label>
+      <ion-input type="text" formControlName="make" [value]="form.controls.make.value | titlecase" [readonly]="readonly"
+        required></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label>Plate Number</ion-label>
-    <ion-input type="text" formControlName="plateNumber" [value]="form.controls.plateNumber.value | uppercase"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label>Model</ion-label>
+      <ion-input type="text" formControlName="model" [value]="form.controls.model.value | titlecase"
+        [readonly]="readonly" required></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label>Registration Number</ion-label>
-    <ion-input type="text" formControlName="registrationNumber"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label>Plate Number</ion-label>
+      <ion-input type="text" formControlName="plateNumber" [value]="form.controls.plateNumber.value | uppercase"
+        [readonly]="readonly" required>
+      </ion-input>
+    </ion-item>
 
-  <ion-item-divider class="ion-padding-top">
-    <ion-title color="primary">Insurance</ion-title>
-  </ion-item-divider>
+    <ion-item>
+      <ion-label>Registration Number</ion-label>
+      <ion-input type="text" formControlName="registrationNumber" [readonly]="readonly" required></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label>Compagny</ion-label>
-    <ion-select placeholder="Select One" formControlName="insuranceCompagny">
-      <ion-select-option *ngFor="let insurance of insurances$ | async;" [value]="insurance.compagny">
-        {{ insurance.compagny }}</ion-select-option>
-    </ion-select>
-  </ion-item>
+    <app-item-title title="Insurance" icon="umbrella"></app-item-title>
 
-  <ion-item>
-    <ion-label>Policy Number</ion-label>
-    <ion-input type="text" formControlName="insurancePolicyNumber"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label>Company</ion-label>
+      <ion-input *ngIf="readonly" formControlName="insuranceCompany" [readonly]="readonly" required></ion-input>
+      <ion-select *ngIf="!readonly" placeholder="Select One" formControlName="insuranceCompany" required>
+        <ion-select-option *ngFor="let insurance of insurances$ | async;" [value]="insurance.company">
+          {{ insurance.company }}</ion-select-option>
+      </ion-select>
+    </ion-item>
 
-  <ion-item-divider></ion-item-divider>
+    <ion-item>
+      <ion-label>Policy Number</ion-label>
+      <ion-input type="text" formControlName="insurancePolicyNumber" [readonly]="readonly" required></ion-input>
+    </ion-item>
+  </ion-list>
 
-  <ion-button expand="block" type="submit" [disabled]="!form.valid">{{ button }}</ion-button>
+  <div class="clearfix">
+    <ion-fab-button class="right" *ngIf="!readonly" type="submit" (click)="onSubmit()" [disabled]="!form.valid">
+      <ion-icon name="checkmark"></ion-icon>
+    </ion-fab-button>
+  </div>
 
 </form>
