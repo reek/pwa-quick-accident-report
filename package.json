@@ -9,7 +9,7 @@
     "dev:gh": "ng serve --deploy-url /pwa-qar-front/ --base-href /pwa-qar-front/",
     "build": "ng build",
     "build:prod": "ng build --prod && npx copy web",
-    "build:prod:gh": "ng build --prod --deploy-url /pwa-qar-front/ --base-href /pwa-qar-front/ && cp www/index.html www/404.html && npx copy web",
+    "build:prod:gh": "ng build --prod --deploy-url /pwa-quick-accident-report/ --base-href /pwa-quick-accident-report/ && cp www/index.html www/404.html && npx copy web",
     "build:prod:ftp": "ng build --prod --deploy-url /pwa/qar/ --base-href /pwa/qar/ && cp .htaccess www/.htaccess && npx copy web",
     "prod": "npm run build:prod && http-server -p 4200 -c-1 www -o",
     "deploy:gh": "gh-pages -d www",
