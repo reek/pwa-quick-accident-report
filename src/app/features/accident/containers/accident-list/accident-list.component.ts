@@ -16,13 +16,13 @@ export class AccidentListComponent implements OnInit {
   constructor(
     private alertService: AlertService,
     private accidentService: AccidentService) {
-    this.accidents$ = this.accidentService.getAccidents()
+    this.accidents$ = this.accidentService.getUserAccidents()
   }
 
   public ngOnInit() { }
 
   async onDelete(id: string) {
-    await this.alertService.deleteConfirm(() => this.accidentService.deleteAccident(id))
+    await this.alertService.deleteConfirm(() => this.accidentService.deleteUserAccident(id))
   }
 
 }
