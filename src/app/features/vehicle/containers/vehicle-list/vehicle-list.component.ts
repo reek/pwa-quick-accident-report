@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { IVehicle } from 'src/app/shared/models/vehicle/vehicle';
-import { VehicleService } from '../../vehicle.service';
 import { AlertService } from 'src/app/core/services/alert/alert.service';
+import { UserService } from 'src/app/core/services/user/user.service';
 
 @Component({
   selector: 'app-vehicle-list',
@@ -15,15 +15,15 @@ export class VehicleListComponent implements OnInit {
 
   constructor(
     private alertService: AlertService,
-    private vehicleService: VehicleService) {
+    private userService: UserService) {
   }
 
   public ngOnInit() {
-    this.vehicles$ = this.vehicleService.getVehicles()
+    this.vehicles$ = this.userService.getUserVehicles()
   }
 
   async onDelete(id: string) {
-    await this.alertService.deleteConfirm(() => this.vehicleService.deleteVehicle(id))
+    await this.alertService.deleteConfirm(() => this.userService.deleteUserVehicle(id))
   }
 
 }
