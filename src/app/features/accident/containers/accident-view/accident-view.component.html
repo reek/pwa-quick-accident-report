@@ -1,3 +1,38 @@
-<p>
-  accident-view works!
-</p>
+<app-header title="Accident"></app-header>
+
+<ion-content>
+  <div *ngIf="(accident$ | async) as accident; else notFound">
+
+    <app-location-form [values]="accident.location" readonly="true"></app-location-form>
+    <app-person-form title="Third-Party Person" [values]="accident.thirdPartyPerson" readonly="true"></app-person-form>
+    <app-vehicle-form title="Third-Party Vehicle" [values]="accident.thirdPartyVehicle" readonly="true">
+    </app-vehicle-form>
+    <app-notes-form [values]="accident.notes" readonly="true"></app-notes-form>
+
+    <div *ngIf="accident.images">
+      <app-item-title title="Pictures" icon="images"></app-item-title>
+      <div *ngFor="let item of accident.images">
+        <ion-item>
+          <ion-icon slot="start" name="image"></ion-icon>
+          <ion-label>{{ item.title }}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-img [src]="item.imageUrl" (click)="viewImage(item.imageUrl, item.title)"></ion-img>
+        </ion-item>
+      </div>
+    </div>
+
+    <ion-button expand="block" (click)="onPrint()">
+      <ion-icon slot="end" name="print"></ion-icon>
+      Print
+    </ion-button>
+
+  </div>
+
+  <ng-template #notFound>
+    <ion-item>
+      <ion-label>Not found accident 😞</ion-label>
+    </ion-item>
+  </ng-template>
+
+</ion-content>
