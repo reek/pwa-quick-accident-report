@@ -3,6 +3,7 @@ import { MenuController } from '@ionic/angular';
 import { NotifyService } from './core/services/notify/notify.service';
 import { AuthService } from './features/auth/auth.service';
 import { Observable } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,7 @@ import { Observable } from 'rxjs';
 export class AppComponent implements OnInit {
 
 
-  public userData$ : Observable<any>
+  public userData$: Observable<any>
 
   constructor(
     private authService: AuthService,
@@ -22,8 +23,7 @@ export class AppComponent implements OnInit {
 
   public ngOnInit() {
     this.initApp();
-    this.userData$ = this.authService.getUserData()
-
+    this.userData$ = this.authService.getUserData().pipe(filter(data => data.email))
   }
 
   public initApp() {

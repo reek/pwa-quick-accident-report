@@ -2,9 +2,9 @@
 
   <app-updates-notification></app-updates-notification>
 
-  <ion-menu side="end" menuId="first">
+  <ion-menu *ngIf="(userData$ | async) as user" side="end" menuId="first">
     <ion-header>
-      <ion-toolbar color="primary" *ngIf="(userData$ | async) as user">
+      <ion-toolbar color="dark">
         <ion-buttons slot="end">
           <ion-button (click)="closeMenu()">
             <ion-icon slot="start" name="close"></ion-icon>
@@ -12,7 +12,7 @@
         </ion-buttons>
         <!-- <ion-title>Menu</ion-title> -->
         <!-- /assets/images/avatar2.png -->
-        <ion-item color="primary">
+        <ion-item color="dark">
           <ion-avatar slot="start">
             <img [src]="user.avatar" />
           </ion-avatar>
@@ -25,37 +25,37 @@
       <ion-list (click)="closeMenu()">
 
         <ion-item routerLink="/">
-          <ion-icon slot="start" color="primary" name="apps"></ion-icon>
+          <ion-icon slot="start" color="medium" name="apps"></ion-icon>
           Dashboard
         </ion-item>
 
         <ion-item routerLink="/personal">
-          <ion-icon slot="start" color="primary" name="person"></ion-icon>
+          <ion-icon slot="start" color="medium" name="person"></ion-icon>
           Personal
         </ion-item>
 
         <ion-item routerLink="/vehicles">
-          <ion-icon slot="start" color="primary" name="logo-model-s"></ion-icon>
+          <ion-icon slot="start" color="medium" name="logo-model-s"></ion-icon>
           Vehicles
         </ion-item>
 
         <ion-item routerLink="/accidents">
-          <ion-icon slot="start" color="primary" name="warning"></ion-icon>
+          <ion-icon slot="start" color="medium" name="warning"></ion-icon>
           Accidents
         </ion-item>
 
         <ion-item routerLink="/emergency">
-          <ion-icon slot="start" color="primary" name="call"></ion-icon>
+          <ion-icon slot="start" color="medium" name="call"></ion-icon>
           Emergency
         </ion-item>
 
         <ion-item routerLink="/insurances">
-          <ion-icon slot="start" color="primary" name="umbrella"></ion-icon>
+          <ion-icon slot="start" color="medium" name="umbrella"></ion-icon>
           Insurances
         </ion-item>
 
         <ion-item routerLink="/transmit">
-          <ion-icon slot="start" color="primary" name="wifi"></ion-icon>
+          <ion-icon slot="start" color="medium" name="wifi"></ion-icon>
           Transmit
         </ion-item>
 
@@ -64,29 +64,29 @@
         </ion-item-divider>
 
         <ion-item routerLink="/feedback">
-          <ion-icon slot="start" color="primary" name="chatboxes"></ion-icon>
+          <ion-icon slot="start" color="medium" name="chatboxes"></ion-icon>
           Feedback
         </ion-item>
 
         <!--         
         <ion-item routerLink="/auth/login">
-          <ion-icon slot="start" color="primary" name="lock"></ion-icon>
+          <ion-icon slot="start" color="medium" name="lock"></ion-icon>
           Login
         </ion-item>
 
         <ion-item routerLink="/auth/register">
-          <ion-icon slot="start" color="primary" name="key"></ion-icon>
+          <ion-icon slot="start" color="medium" name="key"></ion-icon>
           Register
         </ion-item>
 
         <ion-item routerLink="/auth/forgot">
-          <ion-icon slot="start" color="primary" name="medical"></ion-icon>
+          <ion-icon slot="start" color="medium" name="medical"></ion-icon>
           Forgot
         </ion-item> 
         -->
 
         <ion-item routerLink (click)="onLogout()">
-          <ion-icon slot="start" color="primary" name="exit"></ion-icon>
+          <ion-icon slot="start" color="medium" name="exit"></ion-icon>
           Logout
         </ion-item>
       </ion-list>
