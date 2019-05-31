@@ -49,6 +49,8 @@ password: 1234
 - Install dependencies `$ npm install`
 - Run app `$ npm run dev`
 - Navigate to `http://localhost:4200/`
+
+> Tips
 - Mobile device view `right-click inspect` & `toggle device toolbar`
 
 ## Feedback
@@ -57,5 +59,5 @@ password: 1234
 
 ## Contribute
 Contributions are always welcome!
-Please submit a PR.
+Please submit a [PR](https://github.com/reek/pwa-quick-accident-report/pulls).
 
