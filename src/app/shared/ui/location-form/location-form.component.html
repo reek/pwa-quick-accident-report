@@ -132,10 +132,13 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-  </div>
 
-  <ion-button *ngIf="!readonly" type="submit" expand="block" [disabled]="!form.valid">
-    <ion-icon name="checkmark-circle" slot="end"></ion-icon>{{ button }}
-  </ion-button>
+    <div class="clearfix">
+      <ion-fab-button class="right" *ngIf="!readonly" type="submit" (click)="onSubmit()" [disabled]="!form.valid">
+        <ion-icon name="checkmark"></ion-icon>
+      </ion-fab-button>
+    </div>
+
+  </div>
 
 </form>
