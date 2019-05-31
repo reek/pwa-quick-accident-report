@@ -1,5 +1,6 @@
 {
   "name": "pwa-quick-accident-report",
+  "description": "This application is intended to help the driver during a traffic accident.",
   "version": "1.0.0",
   "author": "Ricardo Reves",
   "homepage": "https://cadze.ch/",
@@ -77,6 +78,5 @@
     "ts-node": "~8.0.0",
     "tslint": "~5.12.0",
     "typescript": "~3.1.6"
-  },
-  "description": "This application is intended to help the driver during a traffic accident."
+  }
 }
