@@ -5,7 +5,8 @@
 src/environments/
 *.spec.ts
 android/
-
+ftp-deploy.js
+package-lock.json
 
 *~
 *.sw[mnpcod]
