@@ -1,31 +1,26 @@
-<app-header title="Feedback"></app-header>
+<app-header title="Transmit"></app-header>
 
 <ion-content>
-  <ion-item-divider class="ion-padding-top">
-    <ion-title color="primary">Transmit</ion-title>
-  </ion-item-divider>
+  <app-item-title title="QRcode" icon="barcode"></app-item-title>
 
-  <ion-card>
+  <ion-item>
+    <ion-label>Scan the QR code with your data</ion-label>
+  </ion-item>
 
-    <ion-card-content>
+  <ion-item>
+    <ion-img *ngIf="qrcode" size="150px 150px" [src]="qrcode"></ion-img>
+  </ion-item>
 
-      <ion-item-divider class="ion-padding-top">
-        <ion-label color="dark">Scan the QR code with your data</ion-label>
-      </ion-item-divider>
+  <app-item-title title="Mail" icon="mail"></app-item-title>
 
-      <ion-img *ngIf="qrCode" width="150" height="150" [src]="qrCode"></ion-img>
+  <ion-item>
+    <ion-label>Send an mail with your data</ion-label>
+  </ion-item>
 
-      <ion-item-divider class="ion-padding-top">
-        <ion-label color="dark">Send an mail with your data:</ion-label>
-      </ion-item-divider>
+  <ion-item>
+    <ion-input type="email" placeholder="Email" [(ngModel)]="email"></ion-input>
+  </ion-item>
 
-      <ion-item>
-        <ion-input type="email" placeholder="Email" [(ngModel)]="email"></ion-input>
-      </ion-item>
-
-      <ion-button expand="block" (click)="onSendEmail()" [disabled]="!email">Send</ion-button>
-
-    </ion-card-content>
-  </ion-card>
+  <ion-button expand="block" (click)="onSendEmail()" [disabled]="!email">Send</ion-button>
 
 </ion-content>
