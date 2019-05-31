@@ -1,36 +1,31 @@
-<ion-item-divider class="ion-padding-top">
-  <ion-title color="primary">{{ title }}</ion-title>
-</ion-item-divider>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="fullscren">
 
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <ion-grid>
+  <app-item-title [title]="title" icon="camera"></app-item-title>
 
-    <ion-row align-self-center>
-      <ion-col>
-        <ion-img *ngIf="imageUrl" size="100% 100px" [src]="imageUrl"></ion-img>
-      </ion-col>
-    </ion-row>
+  <ion-item>
+    <ion-icon name="information-circle"></ion-icon>
+    <ion-text class="ion-text-justify info">{{ instructions }}</ion-text>
+  </ion-item>
 
-    <ion-row size="12">
-      <ion-col size="2" offset="0">
-        <ion-fab-button (click)="onTake(true)" size="large" color="light">
-          <ion-icon name="color-wand"></ion-icon>
-        </ion-fab-button>
-      </ion-col>
+  <img *ngIf="imageUrl" class="aperture" [src]="imageUrl" />
+  <ion-input type="hidden" formControlName="imageUrl"></ion-input>
 
-      <ion-col size="2" offset="8" align-items-end>
-        <ion-fab-button size="large" type="button" (click)="onTake()" color="primary">
-          <ion-icon [name]="retry ? 'reverse-camera' : 'camera'"></ion-icon>
-        </ion-fab-button>
-      </ion-col>
-    </ion-row>
+  <ion-fab vertical="bottom" horizontal="start">
+    <ion-fab-button (click)="onTake(true)" color="light">
+      <ion-icon name="color-wand"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
-    <ion-row>
-      <ion-col align-self-center>
-        <ion-input type="hidden" formControlName="imageUrl"></ion-input>
-        <ion-button type="submit" expand="block" [disabled]="!form.valid">Next</ion-button>
-      </ion-col>
-    </ion-row>
+  <ion-fab vertical="bottom" horizontal="center">
+    <ion-fab-button (click)="onTake()" color="dark">
+      <ion-icon size="large" [name]="retry ? 'reverse-camera' : 'camera'"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
-  </ion-grid>
+  <ion-fab vertical="bottom" horizontal="end">
+    <ion-fab-button type="submit" (click)="onSubmit()" [disabled]="!form.valid">
+      <ion-icon name="checkmark"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
 </form>
