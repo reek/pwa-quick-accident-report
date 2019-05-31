@@ -6,6 +6,7 @@ import { map, tap } from 'rxjs/operators';
 import { IPerson } from 'src/app/shared/models/person/person';
 import { IVehicle } from 'src/app/shared/models/vehicle/vehicle';
 import { Router } from '@angular/router';
+import { NotifyService } from '../notify/notify.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,8 @@ export class UserService {
 
   constructor(
     private http: HttpClient,
-    private router: Router) {
+    private router: Router,
+    private notifyService: NotifyService) {
     this.vehiclesSubject = new BehaviorSubject([])
     this.vehicles$ = this.vehiclesSubject.asObservable()
     this.getUserVehiclesDB()
@@ -30,8 +32,12 @@ export class UserService {
         map((res: any) => res.personal))
   }
 
-  public updateUserPersonal(payload: IPerson): Observable<any> {
-    return this.http.put(`${env.apiEndpoint}/users/personal`, payload)
+  public updateUserPersonal(payload: IPerson): void {
+    this.http.put(`${env.apiEndpoint}/users/personal`, payload)
+      .subscribe((res: any) => {
+        if (res.user && res.token)
+          this.notifyService.show("Data saved successfully 😄")
+      }, (err) => console.error("updateUserPersonal", err));
   }
 
   public sendUserFeedback(payload: any) {
@@ -39,12 +45,13 @@ export class UserService {
   }
 
   public getUserVehiclesDB(): void {
-    this.http.get(`${env.apiEndpoint}/users/vehicles`)
+    const subs = this.http.get(`${env.apiEndpoint}/users/vehicles`)
       .pipe(
-        //map((data: { user: { vehicles: IVehicle[] } }) => data.user.vehicles),
-        tap((vehicles: IVehicle[]) => console.log(`get vehicles resp!`, vehicles))
+        tap((vehicles: IVehicle[]) => console.log(`getUserVehiclesDB`, vehicles))
       )
-      .subscribe((vehicles: IVehicle[]) => this.vehiclesSubject.next(vehicles))
+      .subscribe((vehicles: IVehicle[]) => this.vehiclesSubject.next(vehicles),
+        (err) => console.error("getUserVehiclesDB", err),
+        () => subs.unsubscribe());
   }
 
   public getUserVehicles(): Observable<IVehicle[]> {
@@ -60,39 +67,40 @@ export class UserService {
   }
 
   public deleteUserVehicle(id: string): void {
-    this.http.delete(`${env.apiEndpoint}/users/vehicle/${id}`)
+    const subs = this.http.delete(`${env.apiEndpoint}/users/vehicle/${id}`)
       .pipe(
-        tap((res: any) => console.log(`delete vehicle resp!`, id, res))
+        tap((vehicles: IVehicle[]) => console.log(`deleteUserVehicle`, id, vehicles))
       )
-      .subscribe((res: any) => {
-        if (res.user.ok) {
-          const vehicles = this.vehiclesSubject.getValue().filter((vehicle: IVehicle) => vehicle._id !== id)
-          this.vehiclesSubject.next(vehicles)
-          this.router.navigateByUrl('/vehicles');
-        } else {
-          console.error("Error on deleteVehicleById", res)
-        }
-      })
+      .subscribe((vehicles: IVehicle[]) => {
+        const newVehicles = this.vehiclesSubject.getValue().filter((vehicle: IVehicle) => vehicle._id !== id)
+        this.vehiclesSubject.next(newVehicles)
+        this.router.navigateByUrl('/vehicles');
+      }, (err) => console.error("deleteUserVehicle", err),
+        () => subs.unsubscribe());
   }
 
   public newUserVehicle(payload: IVehicle): void {
-    this.http.post(`${env.apiEndpoint}/users/vehicles/`, payload)
+    const subs = this.http.post(`${env.apiEndpoint}/users/vehicles/`, payload)
       .pipe(
-        tap((res: any) => console.log(`new vehicle resp!`, res))
+        tap((vehicles: IVehicle[]) => console.log(`newUserVehicle`, vehicles))
       )
-      .subscribe((res: any) => {
-        if (res.vehicles) {
-          this.vehiclesSubject.next(res.vehicles)
-          this.router.navigateByUrl('/vehicles');
-        } else {
-          console.error("Error on newVehicle", res)
-        }
-      })
+      .subscribe((vehicles: IVehicle[]) => {
+        this.vehiclesSubject.next(vehicles)
+        this.router.navigateByUrl('/vehicles');
+      }, (err) => console.error("newUserVehicle", err),
+        () => subs.unsubscribe());
   }
 
-  public updateUserVehicle(payload: IVehicle): Observable<any> {
-    return this.http.put(`${env.apiEndpoint}/users/vehicle/${payload._id}`, payload)
+  public updateUserVehicle(payload: IVehicle): void {
+    const subs = this.http.put(`${env.apiEndpoint}/users/vehicle/${payload._id}`, payload)
+      .pipe(
+        tap((vehicles: IVehicle[]) => console.log(`updateUserVehicle`, vehicles))
+      )
+      .subscribe((vehicles: IVehicle[]) => {
+        const newVehicles = this.vehiclesSubject.getValue().map((vehicle: IVehicle) => vehicle._id === payload._id ? payload : vehicle)
+        this.vehiclesSubject.next(newVehicles)
+        this.notifyService.show("Data saved successfully 😄")
+      }, (err) => console.error("updateUserVehicle", err),
+        () => subs.unsubscribe());
   }
-
 }
-
