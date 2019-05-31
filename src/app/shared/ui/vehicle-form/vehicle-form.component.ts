@@ -15,8 +15,9 @@ export class VehicleFormComponent implements OnInit {
 
   @Input() public title: string = 'vehicle form'
   @Input() public values: IVehicle
-  @Input() public button: string = "Next"
-  @Output() public onSubmitted: EventEmitter<any> = new EventEmitter<any>()
+  @Input() public readonly: boolean = false
+  @Input() public button: string = "Done"
+  @Output() public onSubmitted: EventEmitter<IVehicle> = new EventEmitter<IVehicle>()
 
   public form: FormGroup
   public insurances$: Observable<Insurance[]>
@@ -40,12 +41,14 @@ export class VehicleFormComponent implements OnInit {
 
   public buildForm() {
     this.form = this.formBuilder.group({
-      type: [0, Validators.required],
+      _id: [''],
+      imageUrl: [''],
+      type: ['', Validators.required],
       make: ['', [Validators.required]],
       model: ['', [Validators.required]],
       plateNumber: ['', [Validators.required]],
       registrationNumber: ['', [Validators.required]],
-      insuranceCompagny: ['', [Validators.required]],
+      insuranceCompany: ['', [Validators.required]],
       insurancePolicyNumber: ['', [Validators.required]],
     })
   }
