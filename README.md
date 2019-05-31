@@ -42,6 +42,7 @@ password: 1234
 - [Typescript](https://www.typescriptlang.org/) - TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.
 - [NodeJS](https://nodejs.org/) - Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine
 - [PWA](https://en.wikipedia.org/wiki/Progressive_web_applications) - Progressive web applications (PWAs) are a type of mobile app delivered through the web, built using common web technologies including HTML, CSS and JavaScript.
+- [Travis CI](https://travis-ci.com/) - The simplest way to test and deploy your projects. Easily sync your GitHub projects with Travis CI and you'll be testing your code in minutes
 
 ## Quick start
 - Run node `$ nvm use 11`
