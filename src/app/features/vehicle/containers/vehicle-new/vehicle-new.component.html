@@ -3,7 +3,7 @@
 <ion-content>
   <div [ngSwitch]="step">
     <div *ngSwitchCase="2">
-      <app-vehicle-form title="Vehicle Data" [values]="" (onSubmitted)="onNext($event)">
+      <app-vehicle-form title="Vehicle" (onSubmitted)="onNext($event)">
       </app-vehicle-form>
     </div>
     <div *ngSwitchCase="3">
@@ -11,7 +11,7 @@
       <ion-button type="button" (click)="onSave()">Save</ion-button>
     </div>
     <div *ngSwitchDefault>
-      <app-take-picture title="Vehicle Picture" (onTaked)="onNext($event)">
+      <app-take-picture title="Vehicle Picture" instructions="Wide view (Landscape)" (onTaked)="onNext($event)">
       </app-take-picture>
     </div>
   </div>
