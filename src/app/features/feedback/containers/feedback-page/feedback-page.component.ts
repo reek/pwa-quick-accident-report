@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { FeedbackService } from '../../feedback.service';
 import { NotifyService } from 'src/app/core/services/notify/notify.service';
+import { UserService } from 'src/app/core/services/user/user.service';
 
 @Component({
   selector: 'app-feedback-page',
@@ -10,12 +10,12 @@ import { NotifyService } from 'src/app/core/services/notify/notify.service';
 })
 export class FeedbackPageComponent implements OnInit {
 
-  public title: string = "Share Your Feedback"
+  public title: string = "Feedback"
   public form: FormGroup
 
   constructor(
     private formBuilder: FormBuilder,
-    private feedbackService: FeedbackService,
+    private userService: UserService,
     private notifyService: NotifyService) { }
 
   public ngOnInit() {
@@ -24,7 +24,7 @@ export class FeedbackPageComponent implements OnInit {
 
   public buildForm() {
     this.form = this.formBuilder.group({
-      feedback: ['', [Validators.minLength(10)]]
+      feedback: ['', [Validators.minLength(5)]]
     })
   }
 
@@ -32,14 +32,15 @@ export class FeedbackPageComponent implements OnInit {
     if (this.form.valid) {
       console.log('form feedback submitted');
       const payload: any = this.form.value
-      this.feedbackService.send(payload)
+      const subs = this.userService.sendUserFeedback(payload)
         .subscribe((res: any) => {
           console.log('server feedback resp!', res)
           if (res.ok) {
             return this.notifyService.show("You're the best! Thanks for helping 😁")
           }
           return this.notifyService.show("Error feedback not sent!")
-        });
+        }, (err: any) => console.error("sendUserFeedback", err),
+          () => subs.unsubscribe());
     }
   }
 
