@@ -2,7 +2,6 @@
 # http://git-scm.com/docs/gitignore
 
 # My Rules
-src/environments/
 *.spec.ts
 android/
 ftp-deploy.js
