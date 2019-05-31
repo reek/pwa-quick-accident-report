@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { VehicleService } from '../../vehicle.service';
 import { IVehicle } from 'src/app/shared/models/vehicle/vehicle';
+import { UserService } from 'src/app/core/services/user/user.service';
 
 @Component({
   selector: 'app-vehicle-new',
@@ -13,7 +13,7 @@ export class VehicleNewComponent implements OnInit {
   public step: number = 1
 
   constructor(
-    private vehicleService: VehicleService) { }
+    private userService: UserService) { }
 
   public ngOnInit() {
   }
@@ -30,9 +30,11 @@ export class VehicleNewComponent implements OnInit {
   }
 
   public onSave(): void {
-    const payload: IVehicle = Object.assign({}, ...this.payload)
+    // I use array reverse, otherwise imageUrl is null
+    const payload: IVehicle = Object.assign({}, ...this.payload.reverse())
+    delete payload._id
     console.log('saving...', payload, this.payload)
-    this.vehicleService.newVehicle(payload)
+    this.userService.newUserVehicle(payload)
   }
 
 }
