@@ -4,15 +4,19 @@ import { RouterModule } from '@angular/router';
 import { AuthPageComponent } from './containers/auth-page/auth-page.component';
 import { LoginPageComponent } from './containers/login-page/login-page.component';
 import { RegisterPageComponent } from './containers/register-page/register-page.component';
-import { ForgotPageComponent } from './containers/forgot-page/forgot-page.component';
+import { ForgotPasswordPageComponent } from './containers/forgot-password-page/forgot-password-page.component';
+import { ResetPasswordPageComponent } from './containers/reset-password-page/reset-password-page.component';
 import { FieldErrorMessageComponent } from 'src/app/shared/ui/field-error-message/field-error-message.component';
+import { VerifyEmailPageComponent } from './containers/verify-email-page/verify-email-page.component';
 
 @NgModule({
   declarations: [
     AuthPageComponent,
     LoginPageComponent,
     RegisterPageComponent,
-    ForgotPageComponent,
+    ForgotPasswordPageComponent,
+    ResetPasswordPageComponent,
+    VerifyEmailPageComponent,
     FieldErrorMessageComponent],
   imports: [
     SharedModule,
@@ -22,7 +26,9 @@ import { FieldErrorMessageComponent } from 'src/app/shared/ui/field-error-messag
         component: AuthPageComponent, children: [
           { path: "login", component: LoginPageComponent },
           { path: "register", component: RegisterPageComponent },
-          { path: "forgot", component: ForgotPageComponent },
+          { path: "forgot/password", component: ForgotPasswordPageComponent },
+          { path: "reset/password/:token", component: ResetPasswordPageComponent },
+          { path: "verify/email/:token", component: VerifyEmailPageComponent },
           {
             path: '',
             redirectTo: 'login',
