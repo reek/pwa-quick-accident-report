@@ -5,6 +5,7 @@ import { AuthService } from '../../auth.service';
 import { IRegister } from 'src/app/shared/models/auth/auth';
 import { ValidateIsPasswordMatch, ValidateIsEmailValid } from 'src/app/shared/validators/field.validator';
 import { map } from 'rxjs/operators';
+import { NotifyService } from 'src/app/core/services/notify/notify.service';
 
 @Component({
   selector: 'app-register-page',
@@ -19,9 +20,14 @@ export class RegisterPageComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
+    private notifyService: NotifyService,
     private router: Router) { }
 
-  public ngOnInit() { // validator.emailMalformed()
+  public ngOnInit() {
+    this.buildForm()
+  }
+
+  public buildForm() {
     this.form = this.formBuilder.group({
       email: ['', [ValidateIsEmailValid], this.isEmailTaken.bind(this)],
       password: ['', [Validators.minLength(4)]],
@@ -43,13 +49,13 @@ export class RegisterPageComponent implements OnInit {
     if (this.form.valid) {
       console.log('form register submitted');
       const payload: IRegister = this.form.value
-      this.authService.register(payload).subscribe((res: any) => {
+      const subs = this.authService.register(payload).subscribe((res: any) => {
         console.log('register response', res)
         if (res.user && res.token) {
           return this.router.navigateByUrl("/personal/view")
         }
-      });
-
+      }, (err: any) => this.notifyService.show("Sorry, bad login 😞"),
+        () => subs.unsubscribe());
     }
   }
 
