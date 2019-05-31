@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AccidentService } from 'src/app/features/accident/accident.service';
 import { IAccident } from 'src/app/shared/models/accident/accident';
-import { IPicture } from 'src/app/shared/models/picture/picture';
+import { ITakePicture } from 'src/app/shared/models/take-picture/take-picture';
 
 @Component({
   selector: 'app-accident-new',
@@ -12,7 +12,7 @@ export class AccidentNewComponent implements OnInit {
 
   public step: number = 1
   public payload: IAccident[] = []
-  public images: IPicture[] = []
+  public images: ITakePicture[] = []
 
   constructor(
     private accidentService: AccidentService) { }
@@ -20,10 +20,12 @@ export class AccidentNewComponent implements OnInit {
   public ngOnInit() {
   }
 
-  public onNext(data: any): void {
+  public onNext(data: any, propName: string): void {
     if (data.imageUrl) {
       this.images.push(data)
     } else {
+      if (propName)
+        data = JSON.parse(`{ "${propName}" : ${JSON.stringify(data)} }`)
       this.payload.push(data)
     }
     this.step += 1
@@ -38,6 +40,6 @@ export class AccidentNewComponent implements OnInit {
   public onSave(): void {
     const payload: IAccident = Object.assign({}, ...this.payload, { images: this.images })
     console.log('save new accident', payload)
-    this.accidentService.newAccident(payload)
+    this.accidentService.newUserAccident(payload)
   }
 }
