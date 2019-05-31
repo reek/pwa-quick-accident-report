@@ -3,8 +3,8 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, tap, switchMap } from 'rxjs/operators';
 import { IVehicle } from 'src/app/shared/models/vehicle/vehicle';
-import { VehicleService } from 'src/app/features/vehicle/vehicle.service';
 import { NotifyService } from 'src/app/core/services/notify/notify.service';
+import { UserService } from 'src/app/core/services/user/user.service';
 
 
 @Component({
@@ -17,11 +17,8 @@ export class VehicleViewComponent implements OnInit {
   public vehicle$: Observable<IVehicle>
   public vehicleId: string
 
-  public vehicle: IVehicle
-
   constructor(
-    private notifyService: NotifyService,
-    private vehicleService: VehicleService,
+    private userService: UserService,
     private route: ActivatedRoute) {
   }
 
@@ -35,27 +32,13 @@ export class VehicleViewComponent implements OnInit {
       .pipe(
         map((paramMap: ParamMap) => paramMap.get('id')),
         tap((id: string) => console.log(`vehicle id: ${id}`)),
-        switchMap((id: string) => this.vehicleService.getVehicle(id))
+        switchMap((id: string) => this.userService.getUserVehicle(id))
       )
-
-    this.vehicle$
-      .pipe(
-        tap(res => console.log(res)))
-      .subscribe((vehicle: IVehicle) => {
-        this.vehicle = vehicle
-      })
-
   }
 
-  public onSave(vehicle: IVehicle) {
-    const payload = Object.assign({}, this.vehicle, vehicle)
-    console.log(9, payload)
-    this.vehicleService.updateVehicle(payload).subscribe((res: any) => {
-      console.log(res)
-      if (res.user.ok && res.token)
-        this.notifyService.show("Saved 😄")
-    })
+  public onSave(payload: IVehicle) {
+    console.log(payload)
+    this.userService.updateUserVehicle(payload)
   }
-
 
 }
