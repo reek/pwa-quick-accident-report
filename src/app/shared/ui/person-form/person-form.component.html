@@ -33,8 +33,8 @@
       <ion-input *ngIf="readonly" formControlName="birthDate" [readonly]="readonly" required>
       </ion-input>
       <!-- https://ionicframework.com/docs/api/datetime -->
-      <ion-datetime *ngIf="!readonly" (ionChange)="updateBirthDate($event)" [readonly]="readonly"
-        [value]="values?.birthDate || ''" display-format="MMMM DD, YYYY">
+      <ion-datetime *ngIf="!readonly" (ionChange)="updateBirthDate($event)" placeHolder="Select Date"
+        [readonly]="readonly" [value]="values?.birthDate || ''" display-format="MMMM DD, YYYY">
       </ion-datetime>
     </ion-item>
 
@@ -102,8 +102,10 @@
 
   </ion-list>
 
-  <ion-button *ngIf="!readonly" type="submit" expand="block" [disabled]="!form.valid">
-    <ion-icon name="checkmark-circle" slot="end"></ion-icon>{{ button }}
-  </ion-button>
+  <div class="clearfix">
+    <ion-fab-button class="right" *ngIf="!readonly" type="submit" (click)="onSubmit()" [disabled]="!form.valid">
+      <ion-icon name="checkmark"></ion-icon>
+    </ion-fab-button>
+  </div>
 
 </form>
