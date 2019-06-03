@@ -4,6 +4,15 @@ import { NotifyService } from './core/services/notify/notify.service';
 import { AuthService } from './features/auth/auth.service';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import { environment as env } from 'src/environments/environment.prod';
+
+// disable debug in production
+if (window && env.production) {
+  console.log = () => { }
+  console.error = () => { }
+  console.info = () => { }
+  console.warn = () => { }
+}
 
 @Component({
   selector: 'app-root',
