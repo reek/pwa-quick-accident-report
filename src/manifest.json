@@ -4,8 +4,8 @@
   "theme_color": "#FF1B1C",
   "background_color": "#ffffff",
   "display": "standalone",
-  "scope": "/",
-  "start_url": "/",
+  "scope": "/pwa-quick-accident-report/",
+  "start_url": "/pwa-quick-accident-report/index.html",
   "icons": [
     {
       "src": "assets/icons/icon-72x72.png",
