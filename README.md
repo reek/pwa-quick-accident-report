@@ -30,10 +30,14 @@ password: 1234
 - Data transfer by email or QRcode.
 - Geolocalisation with map and meteo.
 - Help in entering postal address.
-- Copy of documents with character recognition.
+- Copy of documents with character recognition. (dev)
 - Call the emergency services.
 - Contact your insurer directly.
 - Feedback support.
+
+## Lighthouse Audit
+[![Audit](https://i.imgur.com/FX3QUq4.png)]
+> Best Practices: can be improved with HTTP/2 server.
 
 ## Technologies
 - [Angular 7](https://angular.io/) - Angular is a platform for building mobile and desktop web applications.
@@ -42,6 +46,7 @@ password: 1234
 - [Typescript](https://www.typescriptlang.org/) - TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.
 - [NodeJS](https://nodejs.org/) - Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine
 - [PWA](https://en.wikipedia.org/wiki/Progressive_web_applications) - Progressive web applications (PWAs) are a type of mobile app delivered through the web, built using common web technologies including HTML, CSS and JavaScript.
+- [Lighthouse](https://chrome.google.com/webstore/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk?hl=en) - Lighthouse is an open-source, automated tool for improving the performance, quality, and correctness of your web apps.
 - [Travis CI](https://travis-ci.com/) - The simplest way to test and deploy your projects. Easily sync your GitHub projects with Travis CI and you'll be testing your code in minutes
 
 ## Quick start
